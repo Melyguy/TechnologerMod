@@ -1,2 +1,11 @@
-# This file will automatically update with entries for new content after a build and reload.
+Items: {
+	TinkererGoggles: {
+		Tooltip: The goggles truly open your eyes. Giving you access to ENERGY.
+		DisplayName: Tinkerer Goggles
+	}
 
+	SparkRifle: {
+		DisplayName: Spark Rifle
+		Tooltip: Uses ENERGY to fire!
+	}
+}
