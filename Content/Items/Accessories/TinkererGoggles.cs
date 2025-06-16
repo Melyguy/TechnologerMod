@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Terraria.Localization;
 using Terraria.DataStructures;
 using Microsoft.Xna.Framework;
-using SpiritcallerRoninMod;
+using TechnologerMod;
 
 namespace TechnologerMod.Content.Items.Accessories;
 public class TinkererGoggles : ModItem

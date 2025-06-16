@@ -11,7 +11,7 @@ using Terraria.ModLoader;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
-	public class SparkRifle : ModItem
+	public class ThunderSpear : ModItem
 	{
 		public override void SetDefaults() {
 			// Modders can use Item.DefaultToRangedWeapon to quickly set many common properties, such as: useTime, useAnimation, useStyle, autoReuse, DamageType, shoot, shootSpeed, useAmmo, and noMelee. These are all shown individually here for teaching purposes.
@@ -79,7 +79,7 @@ public override bool CanUseItem(Player player)
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Only allow shooting if the player has enough Focus
-    return modPlayer.TinkererGoggles && modPlayer.Focus >= 20;
+    return modPlayer.TinkererGoggles && modPlayer.Focus >= 50;
 }
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -87,9 +87,9 @@ public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, 
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Consume Focus before shooting
-    if (modPlayer.ConsumeFocus(20))
+    if (modPlayer.ConsumeFocus(50))
     {
-        int projType = ProjectileID.FrostBlastFriendly;
+        int projType = ProjectileID.InfernoFriendlyBolt;
         Projectile.NewProjectile(source, position, velocity, projType, damage, knockback, player.whoAmI);
     }
 

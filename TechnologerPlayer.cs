@@ -28,7 +28,7 @@ public class TechnologerPlayer : ModPlayer
         {
 
 
-            Focus = Math.Min(Focus + 1, MaxFocus); // Passive regen only if armor is worn
+            Focus = (int)Math.Min(Focus + 0.5f, MaxFocus); // Passive regen only if armor is worn
         }
     }
 

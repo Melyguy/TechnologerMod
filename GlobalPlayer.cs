@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Microsoft.Xna.Framework;
 
-namespace SpiritcallerRoninMod{
+namespace TechnologerMod{
     public class GlobalPlayer : ModPlayer{
         public float TechnologerDamage = 0f;
 

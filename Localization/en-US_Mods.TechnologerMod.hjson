@@ -8,4 +8,21 @@ Items: {
 		DisplayName: Spark Rifle
 		Tooltip: Uses ENERGY to fire!
 	}
+
+	ThunderSpear: {
+		DisplayName: Thunder Spear
+		Tooltip: ""
+	}
+
+	TinkeredBlade: {
+		DisplayName: Tinkered Blade
+		Tooltip: ""
+	}
+
+	TinkeredBladeSheath: {
+		DisplayName: Tinkered Blade Sheath
+		Tooltip: ""
+	}
 }
+
+Projectiles.blackmortalSlash.DisplayName: blackmortal Slash
