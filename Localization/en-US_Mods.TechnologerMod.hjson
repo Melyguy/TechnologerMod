@@ -23,6 +23,33 @@ Items: {
 		DisplayName: Tinkered Blade Sheath
 		Tooltip: ""
 	}
+
+	TinkererTablePlaceable: {
+		DisplayName: Tinkerer Table Placeable
+		Tooltip: ""
+	}
+
+	TinkeredExoArmor: {
+		DisplayName: Tinkered Exo Armor
+		Tooltip: ""
+	}
+
+	TinkererRobe: {
+		DisplayName: Tinkerer Robe
+		Tooltip: ""
+	}
+
+	TinkererLeggings: {
+		DisplayName: Tinkerer Leggings
+		Tooltip: ""
+	}
+
+	TinkeredGoggles: {
+		SetBonus: Mods.TechnologerMod.Items.TinkeredGoggles.SetBonus
+		DisplayName: Tinkered Goggles
+		Tooltip: ""
+	}
 }
 
 Projectiles.blackmortalSlash.DisplayName: blackmortal Slash
+Tiles.TinkererTable.MapEntry: Tinkerer Table

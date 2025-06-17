@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TechnologerMod;
 using TechnologerMod.Content.Items.Ammo;
+using TechnologerMod.Content.Tiles.Furniture;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
@@ -66,7 +67,7 @@ namespace TechnologerMod.Content.Items.Weapons
                 .AddIngredient(ItemID.IronBar, 10)
                 .AddIngredient(ItemID.Wood, 10)
                 .AddIngredient(ItemID.StoneBlock, 10)
-                .AddTile(TileID.Anvils)
+                .AddTile<TinkererTable>()
                 .Register();
 
         }

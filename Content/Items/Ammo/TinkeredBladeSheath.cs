@@ -1,3 +1,4 @@
+using TechnologerMod.Content.Tiles.Furniture;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -27,9 +28,13 @@ namespace TechnologerMod.Content.Items.Ammo
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
-			CreateRecipe()
+			CreateRecipe(100)
 				.AddIngredient(ItemID.IronBar, 1)
-				.AddTile(TileID.Anvils)
+				.AddTile<TinkererTable>()
+				.Register();
+						CreateRecipe(100)
+				.AddIngredient(ItemID.LeadBar, 1)
+				.AddTile<TinkererTable>()
 				.Register();
 		}
 	}

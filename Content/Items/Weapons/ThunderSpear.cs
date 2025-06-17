@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using TechnologerMod;
+using TechnologerMod.Content.Tiles.Furniture;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -62,12 +63,17 @@ namespace TechnologerMod.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.Glass, 10)
-                .AddIngredient(ItemID.Wood, 10)
-                .AddIngredient(ItemID.StoneBlock, 10)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.IronBar, 10)
+                .AddIngredient(ItemID.Wood, 20)
+                .AddIngredient(ItemID.StoneBlock, 30)
+                .AddTile<TinkererTable>()
                 .Register();
-
+            CreateRecipe()
+                .AddIngredient(ItemID.LeadBar, 10)
+                .AddIngredient(ItemID.Wood, 20)
+                .AddIngredient(ItemID.StoneBlock, 30)
+                .AddTile<TinkererTable>()
+                .Register();
         }
 
 		// This method lets you adjust position of the gun in the player's hands. Play with these values until it looks good with your graphics.

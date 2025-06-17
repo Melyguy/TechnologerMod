@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using TechnologerMod;
+using TechnologerMod.Content.Tiles.Furniture;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -65,7 +66,7 @@ namespace TechnologerMod.Content.Items.Weapons
                 .AddIngredient(ItemID.Glass, 10)
                 .AddIngredient(ItemID.Wood, 10)
                 .AddIngredient(ItemID.StoneBlock, 10)
-                .AddTile(TileID.WorkBenches)
+                .AddTile<TinkererTable>()
                 .Register();
 
         }
