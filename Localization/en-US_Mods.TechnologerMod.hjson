@@ -80,6 +80,11 @@ Items: {
 		DisplayName: Solidified Leggings
 		Tooltip: ""
 	}
+
+	SlimeCell: {
+		DisplayName: Slime Cell
+		Tooltip: Increases ENERGY by 10.
+	}
 }
 
 Projectiles: {
@@ -94,3 +99,10 @@ Tiles: {
 }
 
 NPCs.PuppeteeredSlime.DisplayName: Puppeteered Slime
+
+Biomes: {
+	IronExpanseBiome: {
+		DisplayName: Iron Expanse Biome
+		TownNPCDialogueName: the Iron Expanse Biome
+	}
+}
