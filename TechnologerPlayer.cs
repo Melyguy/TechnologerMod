@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using ReLogic.Graphics;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -10,7 +11,7 @@ namespace TechnologerMod
 public class TechnologerPlayer : ModPlayer
 {
  public int Focus = 0;
-    public const int MaxFocus = 100;
+    public int MaxFocus = 100;
 
     public bool TinkererGoggles = false;
         private int debugTimer;
@@ -18,6 +19,7 @@ public class TechnologerPlayer : ModPlayer
         public override void ResetEffects()
     {
         TinkererGoggles = false; // Always reset — set again if the player has armor
+        MaxFocus = 100;
     }
 
     public override void PostUpdate()
@@ -50,22 +52,37 @@ public class TechnologerPlayer : ModPlayer
         }
     }
 
-    private void DrawFocusBar()
+private void DrawFocusBar()
+{
+    Vector2 screenPosition = Main.screenPosition;
+    Vector2 playerCenter = Player.Center;
+    Vector2 barPosition = playerCenter - screenPosition + new Vector2(-20, 40);
+
+    int barWidth = 40;
+    int barHeight = 5;
+
+    // Draw background
+    Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)barPosition.X, (int)barPosition.Y, barWidth, barHeight), Color.Gray * 0.6f);
+
+    // Calculate fill width
+    int fillWidth = (int)MathHelper.Clamp((Focus / (float)MaxFocus) * barWidth, 0, barWidth);
+
+    // Draw fill
+    if (fillWidth > 0)
     {
-        Vector2 screenPosition = Main.screenPosition;
-        Vector2 playerCenter = Player.Center;
-        Vector2 barPosition = playerCenter - screenPosition + new Vector2(-20, 40);
-
-        int barWidth = 40;
-        int barHeight = 5;
-
-        // Background
-        Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)barPosition.X, (int)barPosition.Y, barWidth, barHeight), Color.Gray * 0.6f);
-        int fillWidth = (int)((Focus / (float)MaxFocus) * barWidth);
         Main.spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)barPosition.X, (int)barPosition.Y, fillWidth, barHeight), Color.LightBlue);
-        
-        
     }
+
+    // Draw text 
+    /*
+    string focusText = $"Focus: {Focus} / {MaxFocus}";
+    Vector2 textSize = Terraria.GameContent.FontAssets.MouseText.Value.MeasureString(focusText);
+    Vector2 textPosition = new Vector2(barPosition.X + (barWidth / 2) - (textSize.X / 2), barPosition.Y + barHeight + 2);
+
+    Main.spriteBatch.DrawString(Terraria.GameContent.FontAssets.MouseText.Value, focusText, textPosition, Color.White);*/
+}
+
+
 
    
 }

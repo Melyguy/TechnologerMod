@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using TechnologerMod;
 
 namespace TechnologerMod.Content.Items.Accessories;
+	[AutoloadEquip(EquipType.Head)] 
 public class TinkererGoggles : ModItem
 {
     public override void SetStaticDefaults()

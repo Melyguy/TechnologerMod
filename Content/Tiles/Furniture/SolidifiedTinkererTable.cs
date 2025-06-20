@@ -8,8 +8,7 @@ using Terraria.ObjectData;
 namespace TechnologerMod.Content.Tiles.Furniture
 {
 
-
-    public class TinkererTable : ModTile
+    public class SolidifiedTinkererTable : ModTile
     {
         public override void SetStaticDefaults()
         {
@@ -27,10 +26,11 @@ namespace TechnologerMod.Content.Tiles.Furniture
             AddMapEntry(new Color(200, 200, 200), name);
 
             DustType = DustID.Iron;
-            AdjTiles = new int[] { 
+            AdjTiles = new int[] {
                 ModContent.TileType<TinkererTable>(),
+                ModContent.TileType<SolidifiedTinkererTable>()
 
-            }; // This makes it act like an anvil
+            };
         }
 
         public override void NumDust(int i, int j, bool fail, ref int num)

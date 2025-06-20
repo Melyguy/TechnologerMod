@@ -34,7 +34,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.useAnimation = 10;
 			Item.autoReuse = true;
 			
-			Item.damage = 30;
+			Item.damage = 15;
 			Item.knockBack = 3; // Lower knockback for faster hits
 			
 			Item.UseSound = SoundID.Item60;

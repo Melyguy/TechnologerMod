@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using TechnologerMod.Content.Projectiles;
 using TechnologerMod;
 using TechnologerMod.Content.Tiles.Furniture;
 using Terraria;
@@ -12,7 +13,7 @@ using Terraria.ModLoader;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
-	public class ThunderSpear : ModItem
+	public class SlimeLauncher : ModItem
 	{
 		public override void SetDefaults() {
 			// Modders can use Item.DefaultToRangedWeapon to quickly set many common properties, such as: useTime, useAnimation, useStyle, autoReuse, DamageType, shoot, shootSpeed, useAmmo, and noMelee. These are all shown individually here for teaching purposes.
@@ -24,26 +25,26 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.rare = ItemRarityID.Green; // The color that the item's name will be in-game.
 
 			// Use Properties
-			Item.useTime = 10; // The item's use time in ticks (60 ticks == 1 second.)
-			Item.useAnimation = 10; // The length of the item's use animation in ticks (60 ticks == 1 second.)
+			Item.useTime = 30; // The item's use time in ticks (60 ticks == 1 second.)
+			Item.useAnimation = 30; // The length of the item's use animation in ticks (60 ticks == 1 second.)
 			Item.useStyle = ItemUseStyleID.Shoot; // How you use the item (swinging, holding out, etc.)
 			Item.autoReuse = true; // Whether or not you can hold click to automatically use it again.
 
 			// The sound that this item plays when used.
-			Item.UseSound = SoundID.Item11;
+			Item.UseSound = SoundID.Item154;
 
 			// Weapon Properties
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 
             
-			Item.damage = 20; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
+			Item.damage = 25; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
 			Item.knockBack = 5f; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
 			Item.noMelee = true; // So the item's animation doesn't do damage.
 
 			// Gun Properties
 			Item.shoot = ProjectileID.PurificationPowder; // For some reason, all the guns in the vanilla source have this.
-			Item.shootSpeed = 5f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
-			//Item.useAmmo = AmmoID.Bullet; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
+			Item.shootSpeed = 20f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
+			Item.useAmmo = AmmoID.Gel; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
 		}
 
        public override void ModifyTooltips(List<TooltipLine> tooltips)
@@ -63,17 +64,12 @@ namespace TechnologerMod.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.IronBar, 10)
-                .AddIngredient(ItemID.Wood, 20)
-                .AddIngredient(ItemID.StoneBlock, 30)
-                .AddTile<TinkererTable>()
+                .AddIngredient(ItemID.Gel, 80)
+                .AddIngredient(ItemID.GoldBar, 10)
+                .AddIngredient<SparkRifle>()
+                .AddTile<SolidifiedTinkererTable>()
                 .Register();
-            CreateRecipe()
-                .AddIngredient(ItemID.LeadBar, 10)
-                .AddIngredient(ItemID.Wood, 20)
-                .AddIngredient(ItemID.StoneBlock, 30)
-                .AddTile<TinkererTable>()
-                .Register();
+
         }
 
 		// This method lets you adjust position of the gun in the player's hands. Play with these values until it looks good with your graphics.
@@ -85,7 +81,7 @@ public override bool CanUseItem(Player player)
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Only allow shooting if the player has enough Focus
-    return modPlayer.TinkererGoggles && modPlayer.Focus >= 50;
+    return modPlayer.TinkererGoggles && modPlayer.Focus >= 40;
 }
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -93,14 +89,18 @@ public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, 
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Consume Focus before shooting
-    if (modPlayer.ConsumeFocus(50))
+    if (modPlayer.ConsumeFocus(40))
     {
-        int projType = ProjectileID.RocketI;
+        int projType = ModContent.ProjectileType<SlimeLauncherProj>();
         Projectile.NewProjectile(source, position, velocity, projType, damage, knockback, player.whoAmI);
+
+        // Apply recoil to the player
+        player.velocity -= velocity.SafeNormalize(Vector2.Zero) * 2f; // Knockback strength
     }
 
     return false; // Cancel default projectile behavior
 }
+
 
 		// TODO: Move this to a more specifically named example. Say, a paint gun?
 

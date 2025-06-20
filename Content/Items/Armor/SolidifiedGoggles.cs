@@ -9,10 +9,10 @@ namespace TechnologerMod.Content.Items.Armor
 	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
 	// Providing the EquipType.Head value here will result in TML expecting a X_Head.png file to be placed next to the item's main texture.
 	[AutoloadEquip(EquipType.Head)]
-	public class TinkeredGoggles : ModItem
+	public class SolidifiedGoggles : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 20;
-		public static readonly float RoninDamageIncrease = 5f;
+		public static readonly int AdditiveGenericDamageBonus = 40;
+		public static readonly float RoninDamageIncrease = 7f;
 		public static LocalizedText SetBonusText { get; private set; }
 		public static LocalizedText DMGText { get; private set; }
 
@@ -23,7 +23,7 @@ namespace TechnologerMod.Content.Items.Armor
 			ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true; // Draw all hair as normal. Used by Mime Mask, Sunglasses
 			// ArmorIDs.Head.Sets.DrawsBackHairWithoutHeadgear[Item.headSlot] = true;
             DMGText = this.GetLocalization("Tooltip").WithFormatArgs(RoninDamageIncrease);
-			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs( AdditiveGenericDamageBonus);
+			SetBonusText = this.GetLocalization("SetBonus").WithFormatArgs(AdditiveGenericDamageBonus);
 		}
 
 		public override void SetDefaults() {
@@ -31,7 +31,7 @@ namespace TechnologerMod.Content.Items.Armor
 			Item.height = 18; // Height of the item
 			Item.value = Item.sellPrice(gold: 10); // How many coins the item is worth
 			Item.rare = ItemRarityID.Green; // The rarity of the item
-			Item.defense = 2; // The amount of defense the item will give when equipped
+			Item.defense = 5; // The amount of defense the item will give when equipped
 		}
 
 		public override void UpdateEquip(Player player) {
@@ -41,13 +41,14 @@ namespace TechnologerMod.Content.Items.Armor
 
 		// IsArmorSet determines what armor pieces are needed for the setbonus to take effect
 		public override bool IsArmorSet(Item head, Item body, Item legs) {
-			return body.type == ModContent.ItemType<TinkererRobe>() && legs.type == ModContent.ItemType<TinkererLeggings>();
+			return body.type == ModContent.ItemType<SolidifiedExoArmor>() && legs.type == ModContent.ItemType<SolidifiedLeggings>();
 		}
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
 		public override void UpdateArmorSet(Player player) {
-			player.setBonus = SetBonusText.Value; // This is the setbonus tooltip: "Increases dealt damage by 20%"                
-			ModPlayer modPlayer = player.GetModPlayer<TechnologerPlayer>();
+			player.setBonus = SetBonusText.Value; // This is the setbonus tooltip: "Increases dealt damage by 20%"
+			//player.GetModPlayer<GlobalPlayer>().TechnologerDamage += RoninDamageIncrease / 100f; // Increase dealt damage for all weapon classes by 20%
+                ModPlayer modPlayer = player.GetModPlayer<TechnologerPlayer>();
                 ((TechnologerPlayer)modPlayer).TinkererGoggles = true;
                 ((TechnologerPlayer)modPlayer).MaxFocus += AdditiveGenericDamageBonus;
 		}
@@ -56,16 +57,16 @@ namespace TechnologerMod.Content.Items.Armor
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.IronBar, 10)
-                .AddIngredient(ItemID.Wood, 15)
-                .AddIngredient(ItemID.SandBlock, 10)
-                .AddTile<TinkererTable>()
+                .AddIngredient(ItemID.PlatinumBar, 10)
+                .AddIngredient(ItemID.Gel, 15)
+                .AddIngredient<TinkeredGoggles>()
+                .AddTile<SolidifiedTinkererTable>()
                 .Register();
             CreateRecipe()
-                .AddIngredient(ItemID.LeadBar, 10)
-                .AddIngredient(ItemID.Wood, 15)
-                .AddIngredient(ItemID.SandBlock, 10)
-                .AddTile<TinkererTable>()
+                .AddIngredient(ItemID.GoldBar, 10)
+                .AddIngredient(ItemID.Gel, 15)
+                .AddIngredient<TinkeredGoggles>()
+                .AddTile<SolidifiedTinkererTable>()
                 .Register();
         }
 	}

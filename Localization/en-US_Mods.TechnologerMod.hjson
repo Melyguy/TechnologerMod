@@ -36,20 +36,61 @@ Items: {
 
 	TinkererRobe: {
 		DisplayName: Tinkerer Robe
-		Tooltip: ""
+		Tooltip: Increases Technologer damage by {0}%.
 	}
 
 	TinkererLeggings: {
 		DisplayName: Tinkerer Leggings
-		Tooltip: ""
+		Tooltip: Increases Technologer damage by {0}%.
 	}
 
 	TinkeredGoggles: {
-		SetBonus: Mods.TechnologerMod.Items.TinkeredGoggles.SetBonus
+		SetBonus: Increases ENERGY meter by {0}."
 		DisplayName: Tinkered Goggles
+		Tooltip: Increases Technologer damage by 5%
+	}
+
+	TinkererTierTwoPlaceable: {
+		DisplayName: Tinkerer Tier Two Placeable
+		Tooltip: ""
+	}
+
+	SolidifiedTinkererTablePlaceable: {
+		DisplayName: Solidified Tinkerer Table Placeable
+		Tooltip: ""
+	}
+
+	SlimeLauncher: {
+		DisplayName: Slime Launcher
+		Tooltip: Fires ENERGY infused slime balls
+	}
+
+	SolidifiedGoggles: {
+		Tooltip: Increases Technologer damage by 7%
+		SetBonus: Increases ENERGY meter by {0}.
+		DisplayName: Solidified Goggles
+	}
+
+	SolidifiedExoArmor: {
+		DisplayName: Solidified Exo Armor
+		Tooltip: Increases Technologer damage by {0}%
+	}
+
+	SolidifiedLeggings: {
+		DisplayName: Solidified Leggings
 		Tooltip: ""
 	}
 }
 
-Projectiles.blackmortalSlash.DisplayName: blackmortal Slash
-Tiles.TinkererTable.MapEntry: Tinkerer Table
+Projectiles: {
+	blackmortalSlash.DisplayName: blackmortal Slash
+	SlimeLauncherProj.DisplayName: Slime Launcher Proj
+}
+
+Tiles: {
+	TinkererTable.MapEntry: Tinkerer Table
+	TinkererTableTierTwo.MapEntry: Tinkerer Table Tier Two
+	SolidifiedTinkererTable.MapEntry: Solidified Tinkerer Table
+}
+
+NPCs.PuppeteeredSlime.DisplayName: Puppeteered Slime

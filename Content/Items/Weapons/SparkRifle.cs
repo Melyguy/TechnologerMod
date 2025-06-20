@@ -36,7 +36,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 
             
-			Item.damage = 20; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
+			Item.damage = 10; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
 			Item.knockBack = 5f; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
 			Item.noMelee = true; // So the item's animation doesn't do damage.
 
@@ -90,7 +90,7 @@ public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, 
     // Consume Focus before shooting
     if (modPlayer.ConsumeFocus(20))
     {
-        int projType = ProjectileID.FrostBlastFriendly;
+        int projType = ProjectileID.WandOfSparkingSpark;
         Projectile.NewProjectile(source, position, velocity, projType, damage, knockback, player.whoAmI);
     }
 
