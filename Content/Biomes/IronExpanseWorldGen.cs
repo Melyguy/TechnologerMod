@@ -163,7 +163,7 @@ namespace TechnologerMod.Content.Biomes
         }
 
         // Optionally: add "broken" gaps
-        for (int k = 0; k < 3; k++)
+       /* for (int k = 0; k < 3; k++)
         {
             int holeX = originX + WorldGen.genRand.Next(-width / 2 + 2, width / 2 - 2);
             int holeY = floorY + WorldGen.genRand.Next(2, height - 2);
@@ -181,7 +181,7 @@ namespace TechnologerMod.Content.Biomes
                     }
                 }
             }
-        }
+        }*/
     }
 }
 

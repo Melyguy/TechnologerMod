@@ -85,20 +85,70 @@ Items: {
 		DisplayName: Slime Cell
 		Tooltip: Increases ENERGY by 10.
 	}
+
+	SpringLoadedBoomerangGun: {
+		DisplayName: Spring Loaded Boomerang Gun
+		Tooltip: ""
+	}
+
+	ZuuniteBar: {
+		Tooltip: ""
+		DisplayName: Zuunite Bar
+	}
+
+	ZuuniteAnvilItem: {
+		Tooltip: ""
+		DisplayName: Zuunite Anvil Item
+	}
+
+	PrototypeBag: {
+		Tooltip: ""
+		DisplayName: Prototype Bag
+	}
+
+	SpringloadedTinkererTablePlaceable: {
+		Tooltip: ""
+		DisplayName: Springloaded Tinkerer Table Placeable
+	}
+
+	SpringLoadedPistol: {
+		Tooltip: ""
+		DisplayName: Spring Loaded Pistol
+	}
+
+	TinkererMask: {
+		DisplayName: Tinkerer Mask
+		SetBonus: Mods.TechnologerMod.Items.TinkererMask.SetBonus
+		Tooltip: Mods.TechnologerMod.Items.TinkererMask.Tooltip
+	}
+
+	TinkererChestplate: {
+		DisplayName: Tinkerer Chestplate
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
 	blackmortalSlash.DisplayName: blackmortal Slash
 	SlimeLauncherProj.DisplayName: Slime Launcher Proj
+	PrototypeRocket.DisplayName: Prototype Rocket
+	PrototypeNukeDeath.DisplayName: Prototype Nuke Death
 }
 
 Tiles: {
 	TinkererTable.MapEntry: Tinkerer Table
 	TinkererTableTierTwo.MapEntry: Tinkerer Table Tier Two
 	SolidifiedTinkererTable.MapEntry: Solidified Tinkerer Table
+	ZuuniteAnvil.MapEntry: Zuunite Anvil
+	SpringloadedTinkererTable.MapEntry: Springloaded Tinkerer Table
 }
 
-NPCs.PuppeteeredSlime.DisplayName: Puppeteered Slime
+NPCs: {
+	PuppeteeredSlime.DisplayName: Puppeteered Slime
+	PrototypeZR1Tail.DisplayName: Prototype Z R1 Tail
+	PrototypeZR1Head.DisplayName: Prototype Z R1 Head
+	PrototypeZR1Body.DisplayName: Prototype Z R1 Body
+}
 
 Biomes: {
 	IronExpanseBiome: {
