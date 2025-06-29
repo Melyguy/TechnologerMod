@@ -118,13 +118,29 @@ Items: {
 
 	TinkererMask: {
 		DisplayName: Tinkerer Mask
-		SetBonus: Mods.TechnologerMod.Items.TinkererMask.SetBonus
-		Tooltip: Mods.TechnologerMod.Items.TinkererMask.Tooltip
+		Tooltip: Increases Technologer damage by 7%
+		SetBonus: Increases ENERGY meter by {0}.
 	}
 
 	TinkererChestplate: {
 		DisplayName: Tinkerer Chestplate
 		Tooltip: ""
+	}
+
+	SpringloadedLeggings: {
+		DisplayName: Springloaded Leggings
+		Tooltip: ""
+	}
+
+	FleshPlatedMask: {
+		Tooltip: Mods.TechnologerMod.Items.FleshPlatedMask.Tooltip
+		SetBonus: Mods.TechnologerMod.Items.FleshPlatedMask.SetBonus
+		DisplayName: Flesh Plated Mask
+	}
+
+	FleshPlatedChestplate: {
+		Tooltip: ""
+		DisplayName: Flesh Plated Chestplate
 	}
 }
 

@@ -9,9 +9,9 @@ namespace TechnologerMod.Content.Items.Armor
 	// The AutoloadEquip attribute automatically attaches an equip texture to this item.
 	// Providing the EquipType.Head value here will result in TML expecting a X_Head.png file to be placed next to the item's main texture.
 	[AutoloadEquip(EquipType.Head)]
-	public class TinkererMask : ModItem
+	public class FleshPlatedMask : ModItem
 	{
-		public static readonly int AdditiveGenericDamageBonus = 60;
+		public static readonly int AdditiveGenericDamageBonus = 80;
 		public static readonly float RoninDamageIncrease = 7f;
 		public static LocalizedText SetBonusText { get; private set; }
 		public static LocalizedText DMGText { get; private set; }
@@ -31,7 +31,7 @@ namespace TechnologerMod.Content.Items.Armor
 			Item.height = 18; // Height of the item
 			Item.value = Item.sellPrice(gold: 10); // How many coins the item is worth
 			Item.rare = ItemRarityID.Green; // The rarity of the item
-			Item.defense = 8; // The amount of defense the item will give when equipped
+			Item.defense = 10; // The amount of defense the item will give when equipped
 		}
 
 		public override void UpdateEquip(Player player) {
@@ -41,7 +41,7 @@ namespace TechnologerMod.Content.Items.Armor
 
 		// IsArmorSet determines what armor pieces are needed for the setbonus to take effect
 		public override bool IsArmorSet(Item head, Item body, Item legs) {
-			return body.type == ModContent.ItemType<TinkererChestplate>() && legs.type == ModContent.ItemType<SpringloadedLeggings>();
+			return body.type == ModContent.ItemType<FleshPlatedChestplate>() && legs.type == ModContent.ItemType<SpringloadedLeggings>();
 		}
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
@@ -57,13 +57,13 @@ namespace TechnologerMod.Content.Items.Armor
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.PlatinumBar, 10)
-                .AddIngredient(ItemID.Chain, 15)
+                .AddIngredient(ItemID.DemoniteBar, 10)
+                .AddIngredient(ItemID.ShadowScale, 15)
                 .AddTile<SpringloadedTinkererTable>()
                 .Register();
             CreateRecipe()
-                .AddIngredient(ItemID.GoldBar, 10)
-                .AddIngredient(ItemID.Chain, 15)
+                .AddIngredient(ItemID.CrimtaneBar, 10)
+                .AddIngredient(ItemID.TissueSample, 15)
                 .AddTile<SpringloadedTinkererTable>()
                 .Register();
         }
