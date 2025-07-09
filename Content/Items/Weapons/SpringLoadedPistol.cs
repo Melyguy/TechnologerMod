@@ -64,13 +64,13 @@ namespace TechnologerMod.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ItemID.WoodenBoomerang, 1)
+                .AddIngredient(ItemID.EmptyBullet, 1)
                 .AddIngredient(ItemID.GoldBar, 15)
                 .AddIngredient(ItemID.Wood, 30)
                 .AddTile<SpringloadedTinkererTable>()
                 .Register();
             CreateRecipe()
-                .AddIngredient(ItemID.WoodenBoomerang, 1)
+                .AddIngredient(ItemID.EmptyBullet, 1)
                 .AddIngredient(ItemID.PlatinumBar, 15)
                 .AddIngredient(ItemID.Wood, 30)
                 .AddTile<SpringloadedTinkererTable>()

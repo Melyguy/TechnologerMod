@@ -142,6 +142,11 @@ Items: {
 		Tooltip: ""
 		DisplayName: Flesh Plated Chestplate
 	}
+
+	SpringLoadedKatana: {
+		Tooltip: ""
+		DisplayName: Spring Loaded Katana
+	}
 }
 
 Projectiles: {
@@ -149,6 +154,8 @@ Projectiles: {
 	SlimeLauncherProj.DisplayName: Slime Launcher Proj
 	PrototypeRocket.DisplayName: Prototype Rocket
 	PrototypeNukeDeath.DisplayName: Prototype Nuke Death
+	PhoenixSlash2.DisplayName: Phoenix Slash2
+	PhoenixSlash.DisplayName: Phoenix Slash
 }
 
 Tiles: {
