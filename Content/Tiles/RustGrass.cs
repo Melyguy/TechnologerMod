@@ -22,7 +22,7 @@ public class RustGrass : ModTile
         Main.tileBlendAll[Type] = true; // Allow blending with all tiles
         Main.tileMerge[Type][TileID.Grass] = true; // Allow merging with regular grass
         Main.tileMerge[TileID.Grass][Type] = true; // Allow regular grass to merge with this
-        AddMapEntry(new Color(128, 200, 128));
+        AddMapEntry(new Color(102, 33, 110));
 
         RegisterItemDrop(ItemID.DirtBlock);
 

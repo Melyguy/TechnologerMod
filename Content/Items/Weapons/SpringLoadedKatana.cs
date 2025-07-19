@@ -34,7 +34,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.useAnimation = 8;
 			Item.autoReuse = true;
 			
-			Item.damage = 50; // Significantly increased base damage
+			Item.damage = 30; // Significantly increased base damage
 			Item.knockBack = 8;
 			Item.crit = 15; // Higher crit chance
 			
@@ -130,7 +130,6 @@ public override bool CanUseItem(Player player)
 
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
-			Recipe recipe =
              CreateRecipe()
                 .AddIngredient(ItemID.Chain, 20)
                 .AddIngredient(ItemID.GoldBar, 25)
@@ -143,7 +142,6 @@ public override bool CanUseItem(Player player)
                 .AddIngredient(ItemID.Wood, 30)
                 .AddTile<SpringloadedTinkererTable>()
                 .Register();
-			recipe.Register();
             
 		}
 	}

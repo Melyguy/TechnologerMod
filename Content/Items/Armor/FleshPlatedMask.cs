@@ -12,7 +12,7 @@ namespace TechnologerMod.Content.Items.Armor
 	public class FleshPlatedMask : ModItem
 	{
 		public static readonly int AdditiveGenericDamageBonus = 80;
-		public static readonly float RoninDamageIncrease = 7f;
+		public static readonly float RoninDamageIncrease = 8f;
 		public static LocalizedText SetBonusText { get; private set; }
 		public static LocalizedText DMGText { get; private set; }
 
@@ -41,7 +41,7 @@ namespace TechnologerMod.Content.Items.Armor
 
 		// IsArmorSet determines what armor pieces are needed for the setbonus to take effect
 		public override bool IsArmorSet(Item head, Item body, Item legs) {
-			return body.type == ModContent.ItemType<FleshPlatedChestplate>() && legs.type == ModContent.ItemType<SpringloadedLeggings>();
+			return body.type == ModContent.ItemType<FleshPlatedChestplate>() && legs.type == ModContent.ItemType<FleshPlatedLeggings>();
 		}
 
 		// UpdateArmorSet allows you to give set bonuses to the armor.
@@ -59,12 +59,12 @@ namespace TechnologerMod.Content.Items.Armor
             CreateRecipe()
                 .AddIngredient(ItemID.DemoniteBar, 10)
                 .AddIngredient(ItemID.ShadowScale, 15)
-                .AddTile<SpringloadedTinkererTable>()
+                .AddTile<EvilInfusedTinkererTable>()
                 .Register();
             CreateRecipe()
                 .AddIngredient(ItemID.CrimtaneBar, 10)
                 .AddIngredient(ItemID.TissueSample, 15)
-                .AddTile<SpringloadedTinkererTable>()
+                .AddTile<EvilInfusedTinkererTable>()
                 .Register();
         }
 	}

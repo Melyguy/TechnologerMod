@@ -133,8 +133,8 @@ Items: {
 	}
 
 	FleshPlatedMask: {
-		Tooltip: Mods.TechnologerMod.Items.FleshPlatedMask.Tooltip
-		SetBonus: Mods.TechnologerMod.Items.FleshPlatedMask.SetBonus
+		Tooltip: Increases Technologer damage by 8%
+		SetBonus: Increases ENERGY meter by {0}.
 		DisplayName: Flesh Plated Mask
 	}
 
@@ -144,8 +144,53 @@ Items: {
 	}
 
 	SpringLoadedKatana: {
-		Tooltip: ""
+		Tooltip: Uses ENERGY to unleash a strong slash.
 		DisplayName: Spring Loaded Katana
+	}
+
+	FleshPlatedLeggings: {
+		DisplayName: Flesh Plated Leggings
+		Tooltip: ""
+	}
+
+	VoidGlassItem: {
+		DisplayName: Void Glass
+		Tooltip: crystalline ore formed from frozen dimensional fractures.
+	}
+
+	Phasium: {
+		DisplayName: Phasium
+		Tooltip: ""
+	}
+
+	EvilInfusedTinkererTablePlaceable: {
+		Tooltip: ""
+		DisplayName: Evil Infused Tinkerer Table Placeable
+	}
+
+	EyeOfEvil: {
+		Tooltip: ""
+		DisplayName: Eye Of Evil
+	}
+
+	BlightWyrmBag: {
+		Tooltip: ""
+		DisplayName: Blight Wyrm Bag
+	}
+
+	FracturedRelic: {
+		Tooltip: ""
+		DisplayName: Fractured Relic
+	}
+
+	EyesOfTheWyrm: {
+		Tooltip: ""
+		DisplayName: Eyes Of The Wyrm
+	}
+
+	BlightedEyeStaff: {
+		Tooltip: ""
+		DisplayName: Blighted Eye Staff
 	}
 }
 
@@ -156,6 +201,8 @@ Projectiles: {
 	PrototypeNukeDeath.DisplayName: Prototype Nuke Death
 	PhoenixSlash2.DisplayName: Phoenix Slash2
 	PhoenixSlash.DisplayName: Phoenix Slash
+	WyrmEye.DisplayName: Wyrm Eye
+	BlightedEye.DisplayName: Blighted Eye
 }
 
 Tiles: {
@@ -164,6 +211,7 @@ Tiles: {
 	SolidifiedTinkererTable.MapEntry: Solidified Tinkerer Table
 	ZuuniteAnvil.MapEntry: Zuunite Anvil
 	SpringloadedTinkererTable.MapEntry: Springloaded Tinkerer Table
+	EvilInfusedTinkererTable.MapEntry: Evil Infused Tinkerer Table
 }
 
 NPCs: {
@@ -171,6 +219,9 @@ NPCs: {
 	PrototypeZR1Tail.DisplayName: Prototype Z R1 Tail
 	PrototypeZR1Head.DisplayName: Prototype Z R1 Head
 	PrototypeZR1Body.DisplayName: Prototype Z R1 Body
+	BlightWyrmHead.DisplayName: Blight Wyrm Head
+	BlightWyrmBody.DisplayName: Blight Wyrm Body
+	BlightWyrmTail.DisplayName: Blight Wyrm Tail
 }
 
 Biomes: {

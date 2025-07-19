@@ -87,7 +87,7 @@ namespace TechnologerMod.Content.Projectiles
 			Vector2 dustVelocity = (dustRotation + Projectile.ai[0] * MathHelper.PiOver2).ToRotationVector2();
 			if (Main.rand.NextFloat() * 2f < Projectile.Opacity) {
 				// Original Excalibur color: Color.Gold, Color.Orange
-				Color dustColor = Color.Lerp(Color.Red, Color.Orange, Main.rand.NextFloat() * 0.3f);
+				Color dustColor = Color.Lerp(Color.Red, Color.White, Main.rand.NextFloat() * 0.3f);
 				Dust coloredDust = Dust.NewDustPerfect(Projectile.Center + dustRotation.ToRotationVector2() * (Main.rand.NextFloat() * 80f * Projectile.scale + 20f * Projectile.scale), DustID.FireworksRGB, dustVelocity * 1f, 100, dustColor, 0.4f);
 				coloredDust.fadeIn = 0.4f + Main.rand.NextFloat() * 0.15f;
 				coloredDust.noGravity = true;
@@ -199,12 +199,12 @@ namespace TechnologerMod.Content.Projectiles
 			lightingColor = Utils.Remap(lightingColor, 0.2f, 1f, 0f, 1f);
 
 
-    Color backDarkColor = new Color(120, 30, 10);       // Deep ember red
-    Color middleMediumColor = new Color(255, 80, 20);   // Bright fiery orange
-    Color frontLightColor = new Color(255, 230, 100);   // Hot flame yellow
+    Color backDarkColor = new Color(110, 204, 215);       // Deep ember red
+    Color middleMediumColor = new Color(125, 243, 255);   // Bright fiery orange
+    Color frontLightColor = new Color(213, 252, 255);   // Hot flame yellow
 
 
-			Color OrangeTimesLerpTime = Color.Orange * lerpTime * 0.5f;
+			Color OrangeTimesLerpTime = Color.White * lerpTime * 0.5f;
 			OrangeTimesLerpTime.A = (byte)(OrangeTimesLerpTime.A * (1f - lightingColor));
 			Color faintLightingColor = OrangeTimesLerpTime * lightingColor * 0.5f;
 			faintLightingColor.G = (byte)(faintLightingColor.G * lightingColor);
@@ -219,11 +219,11 @@ namespace TechnologerMod.Content.Projectiles
 			// Front part
 			Main.EntitySpriteDraw(texture, position, sourceRectangle, frontLightColor * lightingColor * lerpTime * 0.5f, Projectile.rotation, origin, scale * 0.975f, spriteEffects, 0f);
 			// Thin top line (final frame)
-			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.Orange * 0.6f * lerpTime, Projectile.rotation + Projectile.ai[0] * 0.01f, origin, scale, spriteEffects, 0f);
+			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.White * 0.6f * lerpTime, Projectile.rotation + Projectile.ai[0] * 0.01f, origin, scale, spriteEffects, 0f);
 			// Thin middle line (final frame)
-			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.Orange * 0.5f * lerpTime, Projectile.rotation + Projectile.ai[0] * -0.05f, origin, scale * 0.8f, spriteEffects, 0f);
+			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.White * 0.5f * lerpTime, Projectile.rotation + Projectile.ai[0] * -0.05f, origin, scale * 0.8f, spriteEffects, 0f);
 			// Thin bottom line (final frame)
-			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.Orange * 0.4f * lerpTime, Projectile.rotation + Projectile.ai[0] * -0.1f, origin, scale * 0.6f, spriteEffects, 0f);
+			Main.EntitySpriteDraw(texture, position, texture.Frame(1, 4, 0, 3), Color.White * 0.4f * lerpTime, Projectile.rotation + Projectile.ai[0] * -0.1f, origin, scale * 0.6f, spriteEffects, 0f);
 
 			// This draws some sparkles around the circumference of the swing.
 			for (float i = 0f; i < 8f; i += 1f) {

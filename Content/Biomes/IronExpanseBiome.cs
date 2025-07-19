@@ -9,6 +9,7 @@ using Terraria.Localization;
 using TechnologerMod.Content.Tiles;
 using Terraria.GameContent.Personalities;
 using System.Collections.Generic;
+using TechnologerMod.Content.Tiles.Walls;
 
 namespace TechnologerMod.Content.Biomes;
 
@@ -19,7 +20,7 @@ public class IronExpanseBiome : ModBiome
     public override SceneEffectPriority Priority => SceneEffectPriority.BiomeHigh;
 
     // Add these required overrides
-    public override int Music => MusicID.OtherworldlyDesert ; // Temporary until you have custom music
+    public override int Music => MusicID.OtherworldlySnow ; // Temporary until you have custom music
     
     // Specify biome depth for proper detection
     public override ModWaterStyle WaterStyle => null;
@@ -39,7 +40,7 @@ public class IronExpanseBiome : ModBiome
                 if (WorldGen.InWorld(x, y))
                 {
                     Tile tile = Main.tile[x, y];
-                    if (tile.HasTile && tile.TileType == ModContent.TileType<RustStone>() || tile.TileType == ModContent.TileType<RustGrass>() || tile.TileType == ModContent.TileType<RustStoneBrick>()  )
+                    if (tile.HasTile && tile.TileType == ModContent.TileType<RustStone>() || tile.TileType == ModContent.TileType<RustGrass>() || tile.TileType == ModContent.TileType<RustStoneBrick>() || tile.TileType == ModContent.TileType<RustGrass>() || tile.TileType == ModContent.WallType<RustStoneWall>() || tile.TileType == ModContent.WallType<RustedCoreWall>()  )
                         sakuraTileCount++;
                 }
             }
@@ -50,5 +51,14 @@ public class IronExpanseBiome : ModBiome
         bool isAboveSurface = player.position.Y / 16f <= Main.worldSurface + 30;
         return sakuraTileCount >= 100 && isAboveSurface;
     }
-    
+
+public override void SpecialVisuals(Player player, bool isActive)
+{
+    if (isActive)
+    {
+        // Add a faint dark-purple tint to the screen
+        Lighting.AddLight(player.Center, new Vector3(0.05f, 0.02f, 0.08f));
+    }
+}
+
 }

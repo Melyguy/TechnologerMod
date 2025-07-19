@@ -16,175 +16,226 @@ namespace TechnologerMod.Content.Biomes
     {
         public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
-            int genIndex = tasks.FindIndex(pass => pass.Name.Equals("Micro Biomes"));
+            // Run AFTER everything else so it overwrites vanilla tiles/ores
+            int genIndex = tasks.FindIndex(pass => pass.Name.Equals("Final Cleanup"));
 
             if (genIndex != -1)
             {
-                tasks.Insert(genIndex + 1, new PassLegacy("Iron Expanse", delegate (GenerationProgress progress, GameConfiguration config)
+                tasks.Insert(genIndex + 1, new PassLegacy("Null Zone Planetoid", delegate (GenerationProgress progress, GameConfiguration config)
                 {
-                    progress.Message = "Planting iron expanse...";
+                    progress.Message = "Constructing Null Zone Planetoid...";
 
-                    int edgeBuffer = (int)(Main.maxTilesX * 0.05f);
+                    int count = 1; // How many planetoids to generate
 
-                    for (int attempt = 0; attempt < 200; attempt++)
+                    for (int i = 0; i < count; i++)
                     {
-                        int midX = Main.maxTilesX / 2;
-                        int rightStart = midX + (int)(Main.maxTilesX * 0.1f); // start searching 10% past the middle
-                        int rightEnd = Main.maxTilesX - edgeBuffer;
+                        int x = WorldGen.genRand.Next(Main.maxTilesX / 4, Main.maxTilesX * 3 / 4);
+                        int y = WorldGen.genRand.Next(100, (int)(Main.worldSurface * 0.35));
+                        int radius = 45;
 
-                        int x = WorldGen.genRand.Next(rightStart, rightEnd);
-
-
-                        int y = GetSurfaceY(x);
-
-                        if (y <= 0) continue;
-                        if (!IsValidLocation(x, y)) continue;
-
-                        PlaceSakuraBiome(x, y);
-                        Main.NewText($"[Debug] Iron expanse placed at ({x}, {y})", Color.LightPink);
-                        break;
+                        GeneratePlanetoid(x, y, radius);
                     }
                 }));
             }
         }
 
-        private int GetSurfaceY(int x)
+        private void GeneratePlanetoid(int centerX, int centerY, int radius)
         {
-            for (int y = 100; y < Main.maxTilesY - 200; y++)
+            // First clean any vanilla tiles/ores inside the area
+            CleanupVanillaTiles(centerX, centerY, radius);
+
+            int hollowRadius = radius - 10;        // Interior hollow radius
+            int glassWallRadius = hollowRadius + 4; // Slightly beyond the hollow radius for walls
+
+            for (int x = centerX - radius; x <= centerX + radius; x++)
             {
-                if (Main.tile[x, y].HasTile && Main.tileSolid[Main.tile[x, y].TileType])
-                    return y;
-            }
-            return -1;
-        }
-
-        private bool IsValidLocation(int x, int y)
-        {
-            int minSpawnDistance = 200;
-            if (Math.Abs(x - Main.spawnTileX) < minSpawnDistance)
-                return false;
-
-            float worldSizeScale = Math.Max(0.6f, (float)Main.maxTilesX / 4200f);
-            int width = (int)(100 * worldSizeScale);
-            int height = (int)(60 * worldSizeScale);
-
-            for (int i = -width / 2; i < width / 2; i++)
-            {
-                for (int j = -height / 2; j < height / 2; j++)
+                for (int y = centerY - radius; y <= centerY + radius; y++)
                 {
-                    int checkX = x + i;
-                    int checkY = y + j;
-                    if (!WorldGen.InWorld(checkX, checkY)) continue;
+                    if (!WorldGen.InWorld(x, y)) continue;
 
-                    Tile tile = Main.tile[checkX, checkY];
-                    if (!tile.HasTile) continue;
+                    double dist = Math.Sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+                    Tile tile = Main.tile[x, y];
 
-                    ushort t = tile.TileType;
-                    if (t == TileID.SnowBlock || t == TileID.IceBlock ||
-                        t == TileID.HallowedGrass ||
-                        t == TileID.BlueDungeonBrick || t == TileID.GreenDungeonBrick || t == TileID.PinkDungeonBrick)
-                        return false;
-                }
-            }
-
-            return true;
-        }
-
-        private void PlaceSakuraBiome(int x, int y)
-        {
-            float worldSizeScale = Math.Max(0.6f, (float)Main.maxTilesX / 4200f);
-            int width = (int)(100 * worldSizeScale);
-            int height = (int)(60 * worldSizeScale);
-
-            for (int i = -width / 2; i < width / 2; i++)
-            {
-                for (int j = -height / 2; j < height / 2; j++)
-                {
-                    int newX = x + i;
-                    int newY = y + j;
-                    if (!WorldGen.InWorld(newX, newY)) continue;
-
-                    Tile tile = Main.tile[newX, newY];
-                    if (tile.HasTile && (tile.TileType == TileID.Grass || tile.TileType == TileID.JungleGrass || tile.TileType == TileID.Mud || tile.TileType == TileID.Sand || tile.TileType == TileID.Ebonsand || tile.TileType == TileID.Crimsand  || tile.TileType == TileID.Sandstone || tile.TileType == TileID.SnowBlock || tile.TileType == TileID.IceBlock || tile.TileType == TileID.CorruptGrass || tile.TileType == TileID.CrimsonGrass     ))
+                    if (dist <= radius)
                     {
-                        tile.TileType = (ushort)ModContent.TileType<RustGrass>();
-                        WorldGen.SquareTileFrame(newX, newY, true);
+                        if (dist >= hollowRadius)
+                        {
+                            if (dist > radius - 3)
+                                tile.TileType = (ushort)ModContent.TileType<RustGrass>();
+                            else if (dist > radius - 6)
+                                tile.TileType = (ushort)ModContent.TileType<RustStone>();
+                            else
+                                tile.TileType = (ushort)ModContent.TileType<RustStone>();
+
+                            tile.HasTile = true;
+                        }
+                        else
+                        {
+                            // HOLLOW INTERIOR
+                            tile.HasTile = false;
+                            tile.WallType = (ushort)ModContent.WallType<RustStoneWall>();
+                        }
+
+                        WorldGen.SquareTileFrame(x, y, true);
                     }
-                    if (tile.HasTile && (tile.TileType == TileID.Stone  || tile.TileType == TileID.LivingWood))
+                    else if (dist <= glassWallRadius)
                     {
-                        tile.TileType = (ushort)ModContent.TileType<RustStone>();
-                        WorldGen.SquareTileFrame(newX, newY, true);
+                        // Glass transition layer
+                        tile.HasTile = false;
+                        tile.WallType = WallID.Glass;
                     }
                 }
             }
-            // Generate factory ruins after biome block placement
-                PlaceFactoryRuins(x, y);
 
-            
+            // Place the special ruin room inside
+            PlaceCircularGlassRoom(centerX, centerY);
 
+            // Spawn floating debris around the planetoid
+            PlaceFloatingChunks(centerX, centerY, radius);
 
+            // Scatter your custom ore after everything else
+            ScatterCustomOre(centerX, centerY, radius - 6);
         }
 
-        private void PlaceFactoryRuins(int originX, int originY)
-{
-    int width = WorldGen.genRand.Next(20, 35); // random width
-    int height = WorldGen.genRand.Next(10, 18); // random height
-    int floorCount = WorldGen.genRand.Next(3, 8); // one or two floor ruins
-
-    for (int f = 0; f < floorCount; f++)
-    {
-        int floorY = originY - (f * (height)); // offset for each floor
-
-        for (int i = 0; i < width; i++)
+        private void CleanupVanillaTiles(int centerX, int centerY, int radius)
         {
-            for (int j = 0; j < height; j++)
+            for (int x = centerX - radius; x <= centerX + radius; x++)
             {
-                int x = originX + i - width / 2;
-                int y = floorY + j;
-
-                if (!WorldGen.InWorld(x, y)) continue;
-
-                Tile tile = Main.tile[x, y];
-                if (i == 0 || i == width - 1 || j == 0 || j == height - 1 || WorldGen.genRand.NextBool(20))
+                for (int y = centerY - radius; y <= centerY + radius; y++)
                 {
-                    // Wall
-                    tile.HasTile = true;
-                    tile.TileType = (ushort)ModContent.TileType<RustStoneBrick>();
-                }
-                else
-                {
-                    // Hollow space
-                    tile.HasTile = false;
-                    tile.WallType = (ushort)ModContent.WallType<RustStoneWall>();
-                }
+                    if (!WorldGen.InWorld(x, y)) continue;
 
-                WorldGen.SquareTileFrame(x, y, true);
-            }
-        }
+                    double dist = Math.Sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
 
-        // Optionally: add "broken" gaps
-       /* for (int k = 0; k < 3; k++)
-        {
-            int holeX = originX + WorldGen.genRand.Next(-width / 2 + 2, width / 2 - 2);
-            int holeY = floorY + WorldGen.genRand.Next(2, height - 2);
-            for (int dx = -1; dx <= 1; dx++)
-            {
-                for (int dy = -1; dy <= 1; dy++)
-                {
-                    int x = holeX + dx;
-                    int y = holeY + dy;
-                    if (WorldGen.InWorld(x, y))
+                    if (dist <= radius)
                     {
                         Tile tile = Main.tile[x, y];
-                        tile.HasTile = false;
+
+                        // Remove grass types
+                        if (tile.TileType == TileID.Grass || tile.TileType == TileID.CorruptGrass || tile.TileType == TileID.CrimsonGrass || tile.TileType == TileID.JungleGrass)
+                            tile.TileType = TileID.Dirt;
+
+                        // Remove vanilla ores
+                        if (tile.TileType == TileID.Copper || tile.TileType == TileID.Tin ||
+                            tile.TileType == TileID.Iron || tile.TileType == TileID.Lead ||
+                            tile.TileType == TileID.Silver || tile.TileType == TileID.Tungsten ||
+                            tile.TileType == TileID.Gold || tile.TileType == TileID.Platinum)
+                        {
+                            tile.TileType = TileID.Stone;
+                        }
+
+                        // Optionally clear out vanilla stone
+                        if (tile.TileType == TileID.Stone)
+                            tile.HasTile = false;
+                    }
+                }
+            }
+        }
+
+        private void ScatterCustomOre(int centerX, int centerY, int radius)
+        {
+            int oreClusters = WorldGen.genRand.Next(30, 45); // number of ore nodes
+
+            for (int i = 0; i < oreClusters; i++)
+            {
+                int ox = centerX + WorldGen.genRand.Next(-radius, radius);
+                int oy = centerY + WorldGen.genRand.Next(-radius, radius);
+
+                if (!WorldGen.InWorld(ox, oy)) continue;
+
+                double dist = Math.Sqrt((ox - centerX) * (ox - centerX) + (oy - centerY) * (oy - centerY));
+                if (dist > radius - 3) continue; // stay inside walls
+
+                Tile tile = Main.tile[ox, oy];
+                if (tile.HasTile && tile.TileType == ModContent.TileType<RustStone>())
+                {
+                    tile.TileType = (ushort)ModContent.TileType<VoidGlass>(); // Replace with your custom ore tile type
+                }
+            }
+        }
+
+        private void PlaceCircularGlassRoom(int centerX, int centerY)
+        {
+            int radius = 15;
+
+            for (int i = -radius; i <= radius; i++)
+            {
+                for (int j = -radius; j <= radius; j++)
+                {
+                    int x = centerX + i;
+                    int y = centerY + j;
+
+                    if (!WorldGen.InWorld(x, y)) continue;
+
+                    double distanceSq = i * i + j * j;
+                    if (distanceSq <= radius * radius)
+                    {
+                        Tile tile = Main.tile[x, y];
+
+                        if (distanceSq >= (radius - 3) * (radius - 3))
+                        {
+                            tile.HasTile = true;
+                            tile.TileType = (ushort)ModContent.TileType<RustStone>();
+                        }
+                        else
+                        {
+                            tile.HasTile = true;
+                            tile.TileType = (ushort)ModContent.TileType<VoidGlass>();
+                            tile.WallType = (ushort)ModContent.WallType<RustedCoreWall>();
+                        }
+
                         WorldGen.SquareTileFrame(x, y, true);
                     }
                 }
             }
-        }*/
-    }
-}
+        }
 
+        private void PlaceFloatingChunks(int centerX, int centerY, int mainRadius)
+        {
+            int chunkCount = WorldGen.genRand.Next(30, 45);
+
+            for (int i = 0; i < chunkCount; i++)
+            {
+                double angle = WorldGen.genRand.NextDouble() * Math.PI * 2;
+                int distance = WorldGen.genRand.Next(mainRadius + 10, mainRadius + 40);
+
+                int chunkX = centerX + (int)(Math.Cos(angle) * distance);
+                int chunkY = centerY + (int)(Math.Sin(angle) * distance);
+                int chunkRadius = WorldGen.genRand.Next(3, 8);
+
+                PlaceSmallChunk(chunkX, chunkY, chunkRadius);
+            }
+        }
+
+        private void PlaceSmallChunk(int centerX, int centerY, int radius)
+        {
+            for (int x = centerX - radius; x <= centerX + radius; x++)
+            {
+                for (int y = centerY - radius; y <= centerY + radius; y++)
+                {
+                    if (!WorldGen.InWorld(x, y)) continue;
+
+                    double dist = Math.Sqrt((x - centerX) * (x - centerX) + (y - centerY) * (y - centerY));
+
+                    if (dist <= radius)
+                    {
+                        Tile tile = Main.tile[x, y];
+
+                        int r = WorldGen.genRand.Next(3);
+                        if (r == 0) tile.TileType = (ushort)ModContent.TileType<VoidGlass>();
+                        else if (r == 1) tile.TileType = (ushort)ModContent.TileType<PhasiumPlaced>();
+                        else tile.TileType = (ushort)ModContent.TileType<RustStone>();
+
+                        tile.HasTile = true;
+                        tile.WallType = (ushort)ModContent.WallType<RustedCoreWall>();
+
+                        if (WorldGen.genRand.NextBool(4))
+
+                        WorldGen.SquareTileFrame(x, y, true);
+                    }
+                }
+            }
+        }
 
         public override void Load()
         {
