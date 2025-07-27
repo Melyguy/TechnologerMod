@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechnologerMod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a39c26580e3cefc975c75f2489f1677a63e3e2bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4ffe4c7c97fc692f58a378b6adbcb586d4c62de")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechnologerMod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechnologerMod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

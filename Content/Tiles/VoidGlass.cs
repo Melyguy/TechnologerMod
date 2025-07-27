@@ -17,6 +17,7 @@ public class VoidGlass : ModTile
         DustType = DustID.BrownMoss;
         AddMapEntry(new Color(247, 182, 255));
         // Optionally: SoundType, drop item, etc.
+		HitSound = SoundID.Shatter;
         RegisterItemDrop(ItemID.StoneBlock);
     }
 }

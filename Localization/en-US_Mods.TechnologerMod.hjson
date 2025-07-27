@@ -192,6 +192,21 @@ Items: {
 		Tooltip: ""
 		DisplayName: Blighted Eye Staff
 	}
+
+	FleshPlatedPistol: {
+		DisplayName: Flesh Plated Pistol
+		Tooltip: ""
+	}
+
+	BlightedCore: {
+		DisplayName: Blighted Core
+		Tooltip: Increases ENERGY by 30 and Regen amount by 1 ENERGY
+	}
+
+	BlightedSlasher: {
+		DisplayName: Blighted Slasher
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -203,6 +218,7 @@ Projectiles: {
 	PhoenixSlash.DisplayName: Phoenix Slash
 	WyrmEye.DisplayName: Wyrm Eye
 	BlightedEye.DisplayName: Blighted Eye
+	fleshBullet.DisplayName: flesh Bullet
 }
 
 Tiles: {

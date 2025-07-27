@@ -15,12 +15,14 @@ public class TechnologerPlayer : ModPlayer
 
     public bool TinkererGoggles = false;
         private int debugTimer;
+        public int regenamount = 1;
 
         public override void ResetEffects()
-    {
-        TinkererGoggles = false; // Always reset — set again if the player has armor
-        MaxFocus = 100;
-    }
+        {
+            TinkererGoggles = false; // Always reset — set again if the player has armor
+            MaxFocus = 100;
+            regenamount = 1;
+        }
 
     public override void PostUpdate()
     {

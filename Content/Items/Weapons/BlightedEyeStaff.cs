@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using TechnologerMod.Content.Items.Placeable;
 using Terraria;
 using Terraria.Enums;
 using Terraria.ID;
@@ -31,12 +32,27 @@ namespace TechnologerMod.Content.Items.Weapons
 		{
 			return new Vector2(-5, 0); // Adjusted X to hold more towards the blade
 		}
-		public override void ModifyManaCost(Player player, ref float reduce, ref float mult) {
-			// We can use ModifyManaCost to dynamically adjust the mana cost of this item, similar to how Space Gun works with the Meteor armor set.
-			// See ExampleHood to see how accessories give the reduce mana cost effect.
-			if (player.statLife < player.statLifeMax2 / 2) {
-				mult *= 0.5f; // Half the mana cost when at low health. Make sure to use multiplication with the mult parameter.
-			}
+        public override void AddRecipes()
+        {
+        CreateRecipe()
+            .AddIngredient(ItemID.DemoniteBar, 10)
+            .AddIngredient<EyesOfTheWyrm>(20)
+            .AddTile(TileID.Anvils)
+            .Register();
+            CreateRecipe()
+                .AddIngredient(ItemID.CrimtaneBar, 10)
+                .AddIngredient<EyesOfTheWyrm>(20)
+                .AddTile(TileID.Anvils)
+                .Register();
 		}
+		public override void ModifyManaCost(Player player, ref float reduce, ref float mult)
+        {
+            // We can use ModifyManaCost to dynamically adjust the mana cost of this item, similar to how Space Gun works with the Meteor armor set.
+            // See ExampleHood to see how accessories give the reduce mana cost effect.
+            if (player.statLife < player.statLifeMax2 / 2)
+            {
+                mult *= 0.5f; // Half the mana cost when at low health. Make sure to use multiplication with the mult parameter.
+            }
+        }
 	}
 }

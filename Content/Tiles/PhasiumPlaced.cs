@@ -18,6 +18,7 @@ public class PhasiumPlaced
         Main.tileMergeDirt[Type] = true;
         DustType = DustID.BrownMoss;
         AddMapEntry(new Color(247, 182, 255));
+		HitSound = SoundID.Tink;
         // Optionally: SoundType, drop item, etc.
         RegisterItemDrop(ItemID.StoneBlock);
     }
