@@ -34,7 +34,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.useAnimation = 8;
 			Item.autoReuse = true;
 			
-			Item.damage = 30; // Significantly increased base damage
+			Item.damage = 15; // Significantly increased base damage
 			Item.knockBack = 8;
 			Item.crit = 15; // Higher crit chance
 			

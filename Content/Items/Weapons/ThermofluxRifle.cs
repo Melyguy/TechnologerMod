@@ -14,7 +14,7 @@ using TechnologerMod.Content.Items.Placeable;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
-	public class FleshPlatedPistol : ModItem
+	public class ThermofluxRifle : ModItem
 	{
 		public override void SetDefaults() {
 			// Modders can use Item.DefaultToRangedWeapon to quickly set many common properties, such as: useTime, useAnimation, useStyle, autoReuse, DamageType, shoot, shootSpeed, useAmmo, and noMelee. These are all shown individually here for teaching purposes.
@@ -38,13 +38,13 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 
             
-			Item.damage = 20; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
+			Item.damage = 30; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
 			Item.knockBack = 5f; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
 			Item.noMelee = true; // So the item's animation doesn't do damage.
 
 			// Gun Properties
 			Item.shoot = ProjectileID.PurificationPowder; // For some reason, all the guns in the vanilla source have this.
-			Item.shootSpeed = 20f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
+            Item.shootSpeed = 40f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
 			//Item.useAmmo = AmmoID.Gel; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
 		}
 
@@ -65,18 +65,10 @@ namespace TechnologerMod.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-				.AddIngredient<SpringLoadedBoomerangGun>()
-                .AddIngredient(ItemID.DemoniteBar, 15)
-                .AddIngredient(ItemID.ShadowScale, 30)
-                .AddIngredient<EyesOfTheWyrm>(20)
-                .AddTile<EvilInfusedTinkererTable>()
-                .Register();
-            CreateRecipe()
-				.AddIngredient<SpringLoadedBoomerangGun>()
-                .AddIngredient(ItemID.CrimtaneBar, 15)
-                .AddIngredient(ItemID.TissueSample, 30)
-                .AddIngredient<EyesOfTheWyrm>(20)
-                .AddTile<EvilInfusedTinkererTable>()
+				.AddIngredient<FleshPlatedPistol>()
+                .AddIngredient(ItemID.HellstoneBar, 15)
+                .AddIngredient<HellstoneShard>(20)
+                .AddTile<HellPunkerTable>()
                 .Register();
         }
 
@@ -97,9 +89,9 @@ public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, 
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Consume Focus before shooting
-    if (modPlayer.ConsumeFocus(50))
+    if (modPlayer.ConsumeFocus(20))
     {
-        int projType = ModContent.ProjectileType<fleshBullet>();
+        int projType = ModContent.ProjectileType<MoltenSlag>();
         Projectile.NewProjectile(source, position, velocity, projType, damage, knockback, player.whoAmI);
 
         // Apply recoil to the player
