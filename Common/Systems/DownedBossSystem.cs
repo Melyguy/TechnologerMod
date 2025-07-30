@@ -15,22 +15,28 @@ namespace TechnologerMod.Common.Systems
 	{
 
 		public static bool DownedPrototype = false;
+		public static bool DownedBlight = false;
 		
 		// public static bool downedOtherBoss = false;
 
 		public override void ClearWorld() {
 
 			DownedPrototype = false;
-
+			DownedBlight = false;	
 			// downedOtherBoss = false;
 		}
 
 		// We save our data sets using TagCompounds.
 		// NOTE: The tag instance provided here is always empty by default.
-		public override void SaveWorldData(TagCompound tag) {
+		public override void SaveWorldData(TagCompound tag)
+		{
 
-			if(DownedPrototype) {
-				tag["downedPrototype"] = true;	
+			if (DownedPrototype)
+			{
+				tag["downedPrototype"] = true;
+			}
+			if(DownedBlight) {
+				tag["downedBlight"] = true;	
 			}
 			// if (downedOtherBoss) {
 			//	tag["downedOtherBoss"] = true;
@@ -39,12 +45,13 @@ namespace TechnologerMod.Common.Systems
 
 		public override void LoadWorldData(TagCompound tag) {
 			DownedPrototype = tag.ContainsKey("downedPrototype");
+			DownedPrototype = tag.ContainsKey("downedBlight");
 			// downedOtherBoss = tag.ContainsKey("downedOtherBoss");
 		}
 
 		public override void NetSend(BinaryWriter writer) {
 			// Order of parameters is important and has to match that of NetReceive
-			writer.WriteFlags(DownedPrototype/*, downedOtherBoss*/);
+			writer.WriteFlags(DownedPrototype, DownedBlight);
 
 			// WriteFlags supports up to 8 entries, if you have more than 8 flags to sync, call WriteFlags again.
 
@@ -53,7 +60,7 @@ namespace TechnologerMod.Common.Systems
 
 		public override void NetReceive(BinaryReader reader) {
 			// Order of parameters is important and has to match that of NetSend
-			reader.ReadFlags(out DownedPrototype/*, out downedOtherBoss*/);
+			reader.ReadFlags(out DownedPrototype, out DownedBlight);
 			// ReadFlags supports up to 8 entries, if you have more than 8 flags to sync, call ReadFlags again.
 		}
 	}

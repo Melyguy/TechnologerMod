@@ -28,7 +28,7 @@ namespace TechnologerMod.Content.Items.Placeable
         {
             Recipe recipe = CreateRecipe(10);
             recipe.AddIngredient(ItemID.HellstoneBar, 1);
-            recipe.AddTile<EvilInfusedTinkererTable>();
+            recipe.AddTile<HellPunkerTable>();
             recipe.Register();
             
         }

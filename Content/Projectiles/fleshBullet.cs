@@ -27,7 +27,7 @@ namespace TechnologerMod.Content.Projectiles
         public override void AI()
         {
             // Trail effect
-            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.BlueCrystalShard, Projectile.velocity.X * 0.3f, Projectile.velocity.Y * 0.3f);
+            Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Blood, Projectile.velocity.X * 0.3f, Projectile.velocity.Y * 0.3f);
 
             // Scale over time: from 1.0 to 1.5
             // Rotation effect

@@ -217,6 +217,37 @@ Items: {
 		DisplayName: Thermoflux Rifle
 		Tooltip: ""
 	}
+
+	HellstoneShard: {
+		DisplayName: Hellstone Shard
+		Tooltip: ""
+	}
+
+	Scorchrend: {
+		DisplayName: Scorchrend
+		Tooltip: Set your heart ablaze.
+	}
+
+	HellstoneWeldingHelmet: {
+		Tooltip: Increases Technologer damage by 8%
+		SetBonus: Increases ENERGY meter by {0}.
+		DisplayName: Hellstone Welding Helmet
+	}
+
+	MagmaWeldChestplate: {
+		DisplayName: Magma Weld Chestplate
+		Tooltip: ""
+	}
+
+	MagmaWeldGreaves: {
+		DisplayName: Magma Weld Greaves
+		Tooltip: ""
+	}
+
+	PrismatrixRelicPlaceable: {
+		DisplayName: Prismatrix Relic Placeable
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -230,6 +261,7 @@ Projectiles: {
 	BlightedEye.DisplayName: Blighted Eye
 	fleshBullet.DisplayName: flesh Bullet
 	MoltenSlag.DisplayName: Molten Slag
+	FireSlash.DisplayName: Fire Slash
 }
 
 Tiles: {
@@ -250,6 +282,15 @@ NPCs: {
 	BlightWyrmHead.DisplayName: Blight Wyrm Head
 	BlightWyrmBody.DisplayName: Blight Wyrm Body
 	BlightWyrmTail.DisplayName: Blight Wyrm Tail
+	DesertSpiritHand.DisplayName: Desert Spirit Hand
+	PrismatrixHead.DisplayName: Prismatrix Head
+	amberShard.DisplayName: amber Shard
+	amethystShard.DisplayName: amethyst Shard
+	diamondShard.DisplayName: diamond Shard
+	EmeraldShard.DisplayName: Emerald Shard
+	rubyShard.DisplayName: ruby Shard
+	SapphireShard.DisplayName: Sapphire Shard
+	topazShard.DisplayName: topaz Shard
 }
 
 Biomes: {

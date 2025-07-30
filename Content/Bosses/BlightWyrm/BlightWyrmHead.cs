@@ -38,7 +38,7 @@ namespace TechnologerMod.Content.Bosses.BlightWyrm;
             NPC.height = 104;
             NPC.damage = 50;
             NPC.defense = 80;
-            NPC.lifeMax = 20000;
+            NPC.lifeMax = 10000;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
             NPC.noTileCollide = true;
@@ -287,7 +287,7 @@ public void FlamethrowerAttack()
 {
     // Play explosion sound
     SoundEngine.PlaySound(SoundID.Item14, NPC.position); // Explosion sound
-NPC.SetEventFlagCleared(ref DownedBossSystem.DownedPrototype, -1);
+NPC.SetEventFlagCleared(ref DownedBossSystem.DownedBlight, -1);
     // Create explosion dust
     for (int i = 0; i < 20; i++)
     {
