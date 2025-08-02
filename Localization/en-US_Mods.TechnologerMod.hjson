@@ -248,6 +248,16 @@ Items: {
 		DisplayName: Prismatrix Relic Placeable
 		Tooltip: ""
 	}
+
+	BlightWyrmRelicPlaceable: {
+		DisplayName: Blight Wyrm Relic Placeable
+		Tooltip: ""
+	}
+
+	GemCoreShards: {
+		DisplayName: Gem Core Shards
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -291,6 +301,28 @@ NPCs: {
 	rubyShard.DisplayName: ruby Shard
 	SapphireShard.DisplayName: Sapphire Shard
 	topazShard.DisplayName: topaz Shard
+
+	PeddlerOfRemains: {
+		DisplayName: Peddler Of Remains
+
+				TownNPCMood: {
+					Content: I am content.
+					NoHome: I might be used to being a nomad, but i would prefer to have a home.
+					FarFromHome: I cant seem to find any remains out here.
+					LoveSpace: I enjoy having so much space. Helps me sort my wares.
+					DislikeCrowded: I dislike how crowded it is. Few good customers
+					HateCrowded: I hate how crowded it is. No good customers
+					LikeNPC_Princess: I can tolerate {NPCName}.
+					Princess_LovesNPC: I enjoy {NPCName}'s presence.
+					LoveBiome: I find {BiomeName} relaxing.
+					LikeBiome: I enjoy {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					LoveNPC: I enjoy {NPCName}'s presence.
+					LikeNPC: I can tolerate {NPCName}.
+					DislikeNPC: I dislike {NPCName}'s presence.
+					HateNPC: I want to get rid off {NPCName}. For lord Kuro.
+				}
+	}
 }
 
 Biomes: {

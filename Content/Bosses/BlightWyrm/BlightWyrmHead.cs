@@ -364,7 +364,7 @@ notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<EyesOfTheWyrm>()
 			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BlightWyrmBag>()));
 
 			// ItemDropRule.MasterModeCommonDrop for the relic
-			//npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.PrototypeRelic>()));
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.BlightWyrmRelicPlaceable>()));
 
 			// ItemDropRule.MasterModeDropOnAllPlayers for the pet
 			npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ItemID.SandBlock, 10)); //CHANGE THIS LATER!!!

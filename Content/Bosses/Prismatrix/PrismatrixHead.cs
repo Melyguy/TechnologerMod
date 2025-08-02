@@ -14,6 +14,7 @@ using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TechnologerMod.Content.Bosses.Prismatrix.Shards;
+using Microsoft.Xna.Framework.Graphics;
 
 
 namespace TechnologerMod.Content.Bosses.Prismatrix;
@@ -47,7 +48,7 @@ public class PrismatrixHead : ModNPC
         NPC.knockBackResist = 0f;
         NPC.noGravity = true;
         NPC.noTileCollide = true;
-			NPC.HitSound = SoundID.NPCHit1;
+            NPC.HitSound = SoundID.NPCHit4;
 			NPC.DeathSound = SoundID.NPCDeath3;
 			NPC.value = Item.buyPrice(gold: 10);
         NPC.boss = true;
@@ -149,12 +150,49 @@ public class PrismatrixHead : ModNPC
 				Main.instance.CameraModifiers.Add(modifier);
 			}
 		}
+public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+            Texture2D texture = Terraria.GameContent.TextureAssets.Npc[NPC.type].Value;
+            Vector2 origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+             Vector2 drawPos = NPC.Center - screenPos;
+            float scale = 0.8f;
+                // Draw base texture
+    spriteBatch.Draw(
+        texture,
+        drawPos,
+        NPC.frame,
+        drawColor,
+        NPC.rotation,
+        origin,
+        1f,
+        SpriteEffects.None,
+        0f
+    );
+
+    // Draw glowmask
+    Texture2D glowTexture = ModContent.Request<Texture2D>("TechnologerMod/Content/Bosses/Prismatrix/PrismatrixHead_Glow").Value;
+    spriteBatch.Draw(
+        glowTexture,
+        drawPos,
+        NPC.frame,
+        Color.White, // Glow is unaffected by lighting
+        NPC.rotation,
+        origin,
+        1f,
+        SpriteEffects.None,
+        0f
+    );
+
+            
+            return false;
+        }
     public override void AI()
     {
         // Spawn hands once
         if (NPC.localAI[0] == 0f)
         {
-            if (Main.netMode != NetmodeID.MultiplayerClient) {
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
                 int amberShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<amberShard>(), ai0: NPC.whoAmI, ai1: 1);
                 int topazShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<topazShard>(), ai0: NPC.whoAmI, ai1: -1);
                 int amethystShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<amethystShard>(), ai0: NPC.whoAmI, ai1: 1);
@@ -162,8 +200,9 @@ public class PrismatrixHead : ModNPC
                 int EmeraldShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<EmeraldShard>(), ai0: NPC.whoAmI, ai1: 1);
                 int rubyShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<rubyShard>(), ai0: NPC.whoAmI, ai1: -1);
                 int SapphireShard = NPC.NewNPC(NPC.GetSource_FromAI(), (int)NPC.Center.X, (int)NPC.Center.Y, ModContent.NPCType<SapphireShard>(), ai0: NPC.whoAmI, ai1: 1);
-                
-                if (Main.netMode == NetmodeID.Server) {
+
+                if (Main.netMode == NetmodeID.Server)
+                {
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, amberShard);
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, topazShard);
                     NetMessage.SendData(MessageID.SyncNPC, -1, -1, null, amethystShard);
@@ -176,13 +215,15 @@ public class PrismatrixHead : ModNPC
             NPC.localAI[0] = 1f;
         }
 
-        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].active) {
+        if (NPC.target < 0 || NPC.target == 255 || Main.player[NPC.target].dead || !Main.player[NPC.target].active)
+        {
             NPC.TargetClosest();
         }
 
         Player player = Main.player[NPC.target];
 
-        if (player.dead) {
+        if (player.dead)
+        {
             NPC.velocity.Y -= 0.04f;
             NPC.EncourageDespawn(10);
             return;
@@ -195,15 +236,18 @@ public class PrismatrixHead : ModNPC
         float distance = toPlayer.Length();
 
         // Switch between idle hovering and charging
-        if (AttackTimer >= 180) {
+        if (AttackTimer >= 180)
+        {
             AttackTimer = 0;
             AttackPhase = AttackPhase == 0 ? 1 : 0;
-            if (AttackPhase == 1) {
+            if (AttackPhase == 1)
+            {
                 SoundEngine.PlaySound(SoundID.Roar, NPC.Center);
             }
         }
 
-        if (AttackPhase == 0) {
+        if (AttackPhase == 0)
+        {
             // Idle hovering phase - move in a wider figure-8 pattern above the player
             float targetRotation = MovementTimer * SpinSpeed;
             Vector2 offset = new Vector2(0, IdleHeight);
@@ -212,50 +256,55 @@ public class PrismatrixHead : ModNPC
 
             Vector2 desiredPosition = player.Center + offset;
             Vector2 toDestination = desiredPosition - NPC.Center;
-            
+
             // Slower approach when far away for smoother movement
             float approachSpeed = distance > 600f ? 0.1f : 0.05f;
             NPC.velocity = Vector2.Lerp(NPC.velocity, toDestination.SafeNormalize(Vector2.Zero) * IdleSpeed, approachSpeed);
         }
-       else {
-    // Charge attack phase - add telegraph
-    if (AttackTimer < 30) {
-        // Brief pause before charging
-        NPC.velocity *= 0.9f;
-    }
-    else if (distance > 50f) {
-        NPC.velocity = Vector2.Lerp(NPC.velocity, toPlayer.SafeNormalize(Vector2.Zero) * ChargeSpeed, 0.1f);
-    }
+        else
+        {
+            // Charge attack phase - add telegraph
+            if (AttackTimer < 30)
+            {
+                // Brief pause before charging
+                NPC.velocity *= 0.9f;
+            }
+            else if (distance > 50f)
+            {
+                NPC.velocity = Vector2.Lerp(NPC.velocity, toPlayer.SafeNormalize(Vector2.Zero) * ChargeSpeed, 0.1f);
+            }
 
-    // === Radial Laser Burst ===
-    if (AttackTimer == 60 && Main.netMode != NetmodeID.MultiplayerClient) {
-        int numProjectiles = 12; // Number of lasers in full circle
-        float rotationOffset = Main.rand.NextFloat(MathHelper.TwoPi); // Randomize burst angle
+            // === Radial Laser Burst ===
+            if (AttackTimer == 60 && Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int numProjectiles = 12; // Number of lasers in full circle
+                float rotationOffset = Main.rand.NextFloat(MathHelper.TwoPi); // Randomize burst angle
 
-        for (int i = 0; i < numProjectiles; i++) {
-            float angle = MathHelper.TwoPi * i / numProjectiles + rotationOffset;
-            Vector2 direction = angle.ToRotationVector2();
+                for (int i = 0; i < numProjectiles; i++)
+                {
+                    float angle = MathHelper.TwoPi * i / numProjectiles + rotationOffset;
+                    Vector2 direction = angle.ToRotationVector2();
 
-            int type = ProjectileID.DeathLaser; // Replace with your custom laser if needed
-            float speed = 8f;
-            int damage = NPC.damage / 2;
-            float knockback = 1f;
+                    int type = ProjectileID.DeathLaser; // Replace with your custom laser if needed
+                    float speed = 8f;
+                    int damage = NPC.damage / 2;
+                    float knockback = 1f;
 
-            Projectile.NewProjectile(
-                NPC.GetSource_FromAI(),
-                NPC.Center,
-                direction * speed,
-                type,
-                damage,
-                knockback,
-                Main.myPlayer
-            );
+                    Projectile.NewProjectile(
+                        NPC.GetSource_FromAI(),
+                        NPC.Center,
+                        direction * speed,
+                        type,
+                        damage,
+                        knockback,
+                        Main.myPlayer
+                    );
+                }
+
+                // Laser sound
+                SoundEngine.PlaySound(SoundID.Item33, NPC.Center);
+            }
         }
-
-        // Laser sound
-        SoundEngine.PlaySound(SoundID.Item33, NPC.Center);
-    }
-}
 
     }
 }
