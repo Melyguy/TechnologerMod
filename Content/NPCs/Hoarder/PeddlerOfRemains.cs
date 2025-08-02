@@ -10,12 +10,15 @@ using Terraria.GameContent.Creative;
 using Terraria.GameContent.Personalities;
 using TechnologerMod.Content.Biomes;
 using TechnologerMod.Content.Items.Placeable;
+using TechnologerMod.Common.Systems;
 
 namespace TechnologerMod.Content.NPCs.Hoarder
 {
     [AutoloadHead]
+    
     public class PeddlerOfRemains : ModNPC
     {
+
         public override void SetStaticDefaults()
         {
         }
@@ -38,32 +41,32 @@ namespace TechnologerMod.Content.NPCs.Hoarder
             NPCID.Sets.DangerDetectRange[NPC.type] = 200;
             NPCID.Sets.AttackType[NPC.type] = 1;
             NPCID.Sets.AttackTime[NPC.type] = 30;
-             NPCID.Sets.AttackAverageChance[NPC.type] = 30;
-             NPCID.Sets.HatOffsetY[NPC.type] = 4;
+            NPCID.Sets.AttackAverageChance[NPC.type] = 30;
+            NPCID.Sets.HatOffsetY[NPC.type] = 4;
             AnimationType = 22;
-        NPC.Happiness
-        .SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
-        .SetBiomeAffection<IronExpanseBiome>(AffectionLevel.Love)
-        .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Like)
-        .SetBiomeAffection<DesertBiome>(AffectionLevel.Dislike)
-        .SetNPCAffection(NPCID.Merchant, AffectionLevel.Like)
-        .SetNPCAffection(NPCID.Guide, AffectionLevel.Love)
-        .SetNPCAffection(NPCID.Angler, AffectionLevel.Like)
-         .SetNPCAffection(NPCID.Nurse, AffectionLevel.Dislike)
-         .SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Hate)
-        .SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Dislike);
+            NPC.Happiness
+            .SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
+            .SetBiomeAffection<DesertBiome>(AffectionLevel.Love)
+            .SetBiomeAffection<UndergroundBiome>(AffectionLevel.Like)
+            .SetBiomeAffection<SnowBiome>(AffectionLevel.Dislike)
+            .SetBiomeAffection<OceanBiome>(AffectionLevel.Dislike)
+            .SetNPCAffection(NPCID.Wizard, AffectionLevel.Love)
+            .SetNPCAffection(NPCID.Mechanic, AffectionLevel.Love)
+            .SetNPCAffection(NPCID.Angler, AffectionLevel.Like)
+             .SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Dislike)
+             .SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Hate)
+            .SetNPCAffection(NPCID.Golfer, AffectionLevel.Dislike);
 
         }
 
         public override bool CanTownNPCSpawn(int numTownNPCs)
         {
-            for (var i = 0; i < 255; i++){
+            for (var i = 0; i < 255; i++)
+            {
                 Player player = Main.player[i];
-                foreach (Item item in player.inventory){
-                    if (item.type == ModContent.ItemType<EyesOfTheWyrm>()){
-                        return true;
-                    }
-                    else if (Main.hardMode)
+                foreach (Item item in player.inventory)
+                {
+                    if (item.type == ModContent.ItemType<EyesOfTheWyrm>())
                     {
                         return true;
                     }
@@ -71,12 +74,17 @@ namespace TechnologerMod.Content.NPCs.Hoarder
                 }
 
             }
+            if (Main.hardMode)
+            {
+                        return true;
+                
+            }
             return false;
         }
 
         public override List<string> SetNPCNameList()
         {
-           return new List<string>()
+            return new List<string>()
            {
                 "Kalé",
                 "Thren",
@@ -84,22 +92,22 @@ namespace TechnologerMod.Content.NPCs.Hoarder
                 "Varn"
            };
         }
-        
-    
 
-    public override void SetChatButtons(ref string button, ref string button2)
-    {
-        button = "Shop";
-        button2 = "";
-    }
-    
-    public override void OnChatButtonClicked(bool firstButton, ref string shop)
-    {
-        if (firstButton)
+
+
+        public override void SetChatButtons(ref string button, ref string button2)
         {
-            shop = "Shop";
+            button = "Shop";
+            button2 = "";
         }
-    }
+
+        public override void OnChatButtonClicked(bool firstButton, ref string shop)
+        {
+            if (firstButton)
+            {
+                shop = "Shop";
+            }
+        }
 
         /* public override void SetupShop(Chest shop, ref int nextSlot){
              shop.item[nextSlot].SetDefaults(ModContent.ItemType<Content.Items.Weapons.mortalBlade>());
@@ -124,64 +132,74 @@ namespace TechnologerMod.Content.NPCs.Hoarder
              shop.item[nextSlot].value = 1000000;
              nextSlot++;
          }*/
+        public static readonly Condition DefeatedBlightedWyrm = 
+        new("Mods.TechnologerMod.Conditions.DefeatedBlightedWyrm", () => DownedBossSystem.DownedBlight);
+public static readonly Condition DefeatedPrismatrix = 
+        new("Mods.TechnologerMod.Conditions.DefeatedPrismatrix", () => DownedBossSystem.DownedPrismatrix);
         public override void AddShops()
         {
             NPCShop Sekiroshop = new NPCShop(Type, "Shop")
-                .Add(ModContent.ItemType<Content.Items.Weapons.SpringLoadedPistol>(), Condition.DownedPlantera)
-                .Add(ItemID.Shuriken, Condition.Hardmode)
-                .Add(ItemID.Katana, Condition.Hardmode)
-                .Add(ItemID.Muramasa, Condition.DownedSkeletron)
-                .Add(ItemID.SmokeBomb, Condition.Hardmode)
-                .Add(ItemID.GrapplingHook, Condition.Hardmode)
-                .Add(ItemID.MasterNinjaGear, Condition.DownedPlantera);
-            
+                .Add(ModContent.ItemType<EyesOfTheWyrm>(), DefeatedBlightedWyrm)
+                .Add(ModContent.ItemType<EyesOfTheWyrm>(), DefeatedPrismatrix)
+                .Add(ItemID.Gel, Condition.DownedKingSlime)
+                .Add(ItemID.CrimtaneOre, Condition.DownedEyeOfCthulhu)
+                .Add(ItemID.DemoniteOre, Condition.DownedEyeOfCthulhu)
+                .Add(ItemID.ShadowScale, Condition.DownedEowOrBoc)
+                .Add(ItemID.TissueSample, Condition.DownedEowOrBoc)
+                .Add(ItemID.Bone, Condition.DownedSkeletron);
+
             Sekiroshop.Register();
         }
 
-    
+        
 
-    public override string GetChat(){
-        NPC.FindFirstNPC(ModContent.NPCType<Hoarder.PeddlerOfRemains>());
-        switch(Main.rand.Next(7))
+        public override string GetChat()
         {
-            case 0:   
-                return "Trophies of the dead... for those who'd wear their pride.";
-            case 1:
-                return "You're a Terrarian, I can see it. And i can also see... That you're not after my throat. Then why not purchase a little something?";
-            case 2:
-                return "That race of technologer fools, always crafting. Even their own demise...";
-            case 3:
-                return "Felled gods leave traces. I merely gather what remains.";
-            case 4:
-                return "The road is long and littered in bones... But bones sell well, dont they";
-            case 5:
-                return "I've seen technology like yours before. Long ago. Far below.";      
-            case 6:
-                return "I've seen your battles and know that i shall be right behind you to collect what remains.";      
-            default:
-                return "Some say the technologers vanished. i say however, they were wiped out... By what i dont know."; 
+            NPC.FindFirstNPC(ModContent.NPCType<Hoarder.PeddlerOfRemains>());
+            switch (Main.rand.Next(7))
+            {
+                case 0:
+                    return "Trophies of the dead... for those who'd wear their pride.";
+                case 1:
+                    return "You're a Terrarian, I can see it. And i can also see... That you're not after my throat. Then why not purchase a little something?";
+                case 2:
+                    return "That race of technologer fools, always crafting. Even their own demise...";
+                case 3:
+                    return "Felled gods leave traces. I merely gather what remains.";
+                case 4:
+                    return "The road is long and littered in bones... But bones sell well, dont they";
+                case 5:
+                    return "I've seen technology like yours before. Long ago. Far below.";
+                case 6:
+                    return "I've seen your battles and know that i shall be right behind you to collect what remains.";
+                default:
+                    return "Some say the technologers vanished. i say however, they were wiped out... By what i dont know.";
+            }
         }
-    }
 
-    public override void TownNPCAttackStrength(ref int damage, ref float knockback){
-        damage = 50;
-        knockback = 10f;
-
-    
-    } 
-    public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown){
-        cooldown = 5;
-        randExtraCooldown = 10;
+        public override void TownNPCAttackStrength(ref int damage, ref float knockback)
+        {
+            damage = 50;
+            knockback = 10f;
 
 
-    }
-    public override void TownNPCAttackProj(ref int projType, ref int attackDelay){
-        projType = ProjectileID.Shuriken;
-        attackDelay = 1;
-    }
-    public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset){
-        multiplier = 7f;
-    }
+        }
+        public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
+        {
+            cooldown = 5;
+            randExtraCooldown = 10;
+
+
+        }
+        public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
+        {
+            projType = ProjectileID.Shuriken;
+            attackDelay = 1;
+        }
+        public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
+        {
+            multiplier = 7f;
+        }
         public override void OnKill()
         {
             Item.NewItem(NPC.GetSource_Death(), NPC.getRect(), ItemID.Shuriken, Main.rand.Next(1, 3), false, 0, false, false);

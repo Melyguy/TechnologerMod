@@ -15,6 +15,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TechnologerMod.Content.Bosses.Prismatrix.Shards;
 using Microsoft.Xna.Framework.Graphics;
+using TechnologerMod.Content.Items.Placeable;
 
 
 namespace TechnologerMod.Content.Bosses.Prismatrix;
@@ -106,9 +107,10 @@ public class PrismatrixHead : ModNPC
 
 			// Add the treasure bag using ItemDropRule.BossBag (automatically checks for expert mode)
 			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BlightWyrmBag>()));
-
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 1)); // 33% chance
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCoreShards>(), 1, 30, 45));
 			// ItemDropRule.MasterModeCommonDrop for the relic
-			//npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.DesertSpiritRelic>()));
+			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.PrismatrixRelicPlaceable>()));
 
 			// ItemDropRule.MasterModeDropOnAllPlayers for the pet
 			npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ItemID.SandBlock, 10)); //CHANGE THIS LATER!!!
@@ -118,7 +120,7 @@ public class PrismatrixHead : ModNPC
 			// The first time this boss is killed, spawn ExampleOre into the world. This code is above SetEventFlagCleared because that will set downedForestGuardian to true.
 
 			// This sets downedForestGuardian to true, and if it was false before, it initiates a lantern night
-			NPC.SetEventFlagCleared(ref DownedBossSystem.DownedPrototype, -1);
+			NPC.SetEventFlagCleared(ref DownedBossSystem.DownedPrismatrix, -1);
 
 			// Since this hook is only ran in singleplayer and serverside, we would have to sync it manually.
 			// Thankfully, vanilla sends the MessageID.WorldData packet if a BOSS was killed automatically, shortly after this hook is ran

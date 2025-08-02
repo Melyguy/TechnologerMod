@@ -258,6 +258,21 @@ Items: {
 		DisplayName: Gem Core Shards
 		Tooltip: ""
 	}
+
+	GemCore: {
+		DisplayName: Gem Core
+		Tooltip: ""
+	}
+
+	PrismatrixBag: {
+		DisplayName: Prismatrix Bag
+		Tooltip: ""
+	}
+
+	BouncySlimeLauncher: {
+		DisplayName: Bouncy Slime Launcher
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -272,6 +287,7 @@ Projectiles: {
 	fleshBullet.DisplayName: flesh Bullet
 	MoltenSlag.DisplayName: Molten Slag
 	FireSlash.DisplayName: Fire Slash
+	BouncySlimeBall.DisplayName: Bouncy Slime Ball
 }
 
 Tiles: {
@@ -305,23 +321,23 @@ NPCs: {
 	PeddlerOfRemains: {
 		DisplayName: Peddler Of Remains
 
-				TownNPCMood: {
-					Content: I am content.
-					NoHome: I might be used to being a nomad, but i would prefer to have a home.
-					FarFromHome: I cant seem to find any remains out here.
-					LoveSpace: I enjoy having so much space. Helps me sort my wares.
-					DislikeCrowded: I dislike how crowded it is. Few good customers
-					HateCrowded: I hate how crowded it is. No good customers
-					LikeNPC_Princess: I can tolerate {NPCName}.
-					Princess_LovesNPC: I enjoy {NPCName}'s presence.
-					LoveBiome: I find {BiomeName} relaxing.
-					LikeBiome: I enjoy {BiomeName}.
-					DislikeBiome: I dislike {BiomeName}.
-					LoveNPC: I enjoy {NPCName}'s presence.
-					LikeNPC: I can tolerate {NPCName}.
-					DislikeNPC: I dislike {NPCName}'s presence.
-					HateNPC: I want to get rid off {NPCName}. For lord Kuro.
-				}
+		TownNPCMood: {
+			Content: I am content.
+			NoHome: I might be used to being a nomad, but i would prefer to have a home.
+			FarFromHome: I cant seem to find any remains out here.
+			LoveSpace: I enjoy having so much space. Helps me sort my wares.
+			DislikeCrowded: I dislike how crowded it is. Few good customers
+			HateCrowded: I hate how crowded it is. No good customers
+			LikeNPC_Princess: I think {NPCName} is a nice customer.
+			Princess_LovesNPC: I think {NPCName} is a valued customer.
+			LoveBiome: I find {BiomeName} relaxing.
+			LikeBiome: I enjoy {BiomeName}.
+			DislikeBiome: I dislike {BiomeName}.
+			LoveNPC: I think {NPCName} is a valued customer.
+			LikeNPC: I think {NPCName} is a nice customer.
+			DislikeNPC: "{NPCName} isn't a valued customer."
+			HateNPC: I want to turn {NPCName} into a trophy. Will you do it?
+		}
 	}
 }
 
@@ -331,3 +347,5 @@ Biomes: {
 		TownNPCDialogueName: the Iron Expanse Biome
 	}
 }
+
+Conditions.DefeatedBlightedWyrm: Mods.TechnologerMod.Conditions.DefeatedBlightedWyrm
