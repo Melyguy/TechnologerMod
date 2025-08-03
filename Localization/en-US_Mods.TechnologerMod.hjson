@@ -348,4 +348,7 @@ Biomes: {
 	}
 }
 
-Conditions.DefeatedBlightedWyrm: Mods.TechnologerMod.Conditions.DefeatedBlightedWyrm
+Conditions: {
+	DefeatedBlightedWyrm: Defeated bligted wyrm
+	DefeatedPrismatrix: Defeated prismatrix
+}

@@ -140,12 +140,24 @@ public static readonly Condition DefeatedPrismatrix =
         {
             NPCShop Sekiroshop = new NPCShop(Type, "Shop")
                 .Add(ModContent.ItemType<EyesOfTheWyrm>(), DefeatedBlightedWyrm)
-                .Add(ModContent.ItemType<EyesOfTheWyrm>(), DefeatedPrismatrix)
+                .Add(ModContent.ItemType<GemCoreShards>(), DefeatedPrismatrix)
                 .Add(ItemID.Gel, Condition.DownedKingSlime)
                 .Add(ItemID.CrimtaneOre, Condition.DownedEyeOfCthulhu)
                 .Add(ItemID.DemoniteOre, Condition.DownedEyeOfCthulhu)
                 .Add(ItemID.ShadowScale, Condition.DownedEowOrBoc)
                 .Add(ItemID.TissueSample, Condition.DownedEowOrBoc)
+                .Add(ItemID.BeeWax, Condition.DownedQueenBee)
+                .Add(ItemID.SoulofLight, Condition.Hardmode)
+                .Add(ItemID.SoulofNight, Condition.Hardmode)
+                .Add(ItemID.SoulofFright, Condition.DownedSkeletronPrime)
+                .Add(ItemID.SoulofSight, Condition.DownedTwins)
+                .Add(ItemID.SoulofMight, Condition.DownedDestroyer)
+                .Add(ItemID.HallowedBar, Condition.DownedMechBossAll)
+                .Add(ItemID.BeetleHusk, Condition.DownedGolem)
+                .Add(ItemID.FragmentNebula, Condition.DownedMoonLord)
+                .Add(ItemID.FragmentSolar, Condition.DownedMoonLord)
+                .Add(ItemID.FragmentStardust, Condition.DownedMoonLord)
+                .Add(ItemID.FragmentVortex, Condition.DownedMoonLord)
                 .Add(ItemID.Bone, Condition.DownedSkeletron);
 
             Sekiroshop.Register();
@@ -171,7 +183,7 @@ public static readonly Condition DefeatedPrismatrix =
                 case 5:
                     return "I've seen technology like yours before. Long ago. Far below.";
                 case 6:
-                    return "I've seen your battles and know that i shall be right behind you to collect what remains.";
+                    return "I've seen your battles. Know that i shall be right behind you to collect what remains.";
                 default:
                     return "Some say the technologers vanished. i say however, they were wiped out... By what i dont know.";
             }
