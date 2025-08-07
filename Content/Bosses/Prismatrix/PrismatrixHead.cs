@@ -16,6 +16,7 @@ using Terraria.ModLoader;
 using TechnologerMod.Content.Bosses.Prismatrix.Shards;
 using Microsoft.Xna.Framework.Graphics;
 using TechnologerMod.Content.Items.Placeable;
+using TechnologerMod.Content.Items.Accessories;
 
 
 namespace TechnologerMod.Content.Bosses.Prismatrix;
@@ -107,7 +108,8 @@ public class PrismatrixHead : ModNPC
 
 			// Add the treasure bag using ItemDropRule.BossBag (automatically checks for expert mode)
 			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BlightWyrmBag>()));
-            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 1)); // 33% chance
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 3)); // 33% chance
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ShardLauncher>(), 5)); // 33% chance
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCoreShards>(), 1, 30, 45));
 			// ItemDropRule.MasterModeCommonDrop for the relic
 			npcLoot.Add(ItemDropRule.MasterModeCommonDrop(ModContent.ItemType<Items.Placeable.Furniture.PrismatrixRelicPlaceable>()));

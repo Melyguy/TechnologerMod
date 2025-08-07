@@ -261,7 +261,7 @@ Items: {
 
 	GemCore: {
 		DisplayName: Gem Core
-		Tooltip: ""
+		Tooltip: Increases Technologer Damage by 5% and Regen amount by 1 ENERGY
 	}
 
 	PrismatrixBag: {
@@ -271,6 +271,11 @@ Items: {
 
 	BouncySlimeLauncher: {
 		DisplayName: Bouncy Slime Launcher
+		Tooltip: ""
+	}
+
+	ShardLauncher: {
+		DisplayName: Shard Launcher
 		Tooltip: ""
 	}
 }
@@ -288,6 +293,7 @@ Projectiles: {
 	MoltenSlag.DisplayName: Molten Slag
 	FireSlash.DisplayName: Fire Slash
 	BouncySlimeBall.DisplayName: Bouncy Slime Ball
+	Shard.DisplayName: Shard
 }
 
 Tiles: {

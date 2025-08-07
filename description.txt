@@ -1,1 +1,17 @@
-Modify this file with a description of your mod.
+"Invent. Improve. Overload"
+
+The Technologer is a new custom class focused on technological expantion/evolution. Progress through the game by inventing, improving and overloading.
+
+Contains:
+    -New class: The Technologer
+        Harness technological weaponry that evolves alongside you.
+    -Custom crafting stations
+        Upgrade your weaponry through interacting with the different technologer stations.
+    -Custom Bosses
+        Face new and different bosses that integrate into your progression.
+    -New NPCs
+        Meet the new NPCs that will help you along your journey.
+    -Custom world generation
+        Explore custom world generation.
+    -Modular expansion
+         Designed for smooth integration into modded playthroughs.

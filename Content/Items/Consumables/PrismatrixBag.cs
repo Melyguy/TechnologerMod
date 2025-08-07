@@ -1,5 +1,7 @@
 using TechnologerMod.Content.Bosses.BlightWyrm;
+using TechnologerMod.Content.Bosses.Prismatrix;
 using TechnologerMod.Content.Bosses.PrototypeZR1;
+using TechnologerMod.Content.Items.Accessories;
 using TechnologerMod.Content.Items.Armor;
 using TechnologerMod.Content.Items.Placeable;
 using TechnologerMod.Content.Items.Placeable.Furniture;
@@ -41,14 +43,14 @@ namespace TechnologerMod.Content.Items.Consumables
 		public override void ModifyItemLoot(ItemLoot itemLoot) {
 			// Guaranteed expert drops
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GemCoreShards>(), 1, 30, 45));
-			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 1));
-			
+			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 3));
+			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShardLauncher>(), 5));
 			// Chance-based drops (33% chance each)
 			
 			// Wood drops (5-15 pieces, guaranteed)
 			
 			// Add coins based on NPC value
-			itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<BlightWyrmHead>()));
+			itemLoot.Add(ItemDropRule.CoinsBasedOnNPCValue(ModContent.NPCType<PrismatrixHead>()));
 		}
 	}
 }
