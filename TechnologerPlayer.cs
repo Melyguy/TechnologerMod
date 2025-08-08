@@ -76,12 +76,12 @@ private void DrawFocusBar()
     }
 
     // Draw text 
-    /*
-    string focusText = $"Focus: {Focus} / {MaxFocus}";
+    
+    string focusText = $"ENERGY: {Focus} / {MaxFocus}";
     Vector2 textSize = Terraria.GameContent.FontAssets.MouseText.Value.MeasureString(focusText);
     Vector2 textPosition = new Vector2(barPosition.X + (barWidth / 2) - (textSize.X / 2), barPosition.Y + barHeight + 2);
 
-    Main.spriteBatch.DrawString(Terraria.GameContent.FontAssets.MouseText.Value, focusText, textPosition, Color.White);*/
+    Main.spriteBatch.DrawString(Terraria.GameContent.FontAssets.MouseText.Value, focusText, textPosition, Color.White);
 }
 
 

@@ -32,7 +32,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.autoReuse = true; // Whether or not you can hold click to automatically use it again.
 
 			// The sound that this item plays when used.
-			Item.UseSound = SoundID.Item38;
+			Item.UseSound = SoundID.Item101;
 
 			// Weapon Properties
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
@@ -72,7 +72,7 @@ public override bool CanUseItem(Player player)
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Only allow shooting if the player has enough Focus
-    return modPlayer.TinkererGoggles && modPlayer.Focus >= 50;
+    return modPlayer.TinkererGoggles && modPlayer.Focus >= 20;
 }
 
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

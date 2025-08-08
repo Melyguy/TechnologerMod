@@ -1,3 +1,4 @@
 displayName = Technologer Mod
 author = 3XMelly
 version = 0.11
+mp3Import = true

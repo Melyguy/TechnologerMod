@@ -345,6 +345,8 @@ NPCs: {
 			HateNPC: I want to turn {NPCName} into a trophy. Will you do it?
 		}
 	}
+
+	Haemorrex.DisplayName: Haemorrex, Forgotten triplet
 }
 
 Biomes: {
