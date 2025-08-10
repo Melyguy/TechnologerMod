@@ -19,5 +19,7 @@ public class VoidGlass : ModTile
         // Optionally: SoundType, drop item, etc.
 		HitSound = SoundID.Shatter;
         RegisterItemDrop(ItemID.StoneBlock);
+        MineResist = 4f; // Higher = harder to mine (optional)
+        MinPick = 200;   // 200 pickaxe power = Pickaxe Axe or better
     }
 }

@@ -22,6 +22,7 @@ namespace TechnologerMod.Content.Bosses.PrototypeZR1;
     public class PrototypeZR1Head : ModNPC
     {
         public bool boomboomBool = false;
+    public bool intro = false;
                 // AI states for readability
         private enum SakuraDragonAI
         {
@@ -53,7 +54,12 @@ namespace TechnologerMod.Content.Bosses.PrototypeZR1;
 
         public override void AI()
         {
-            
+                    if (intro == false)
+        {
+            intro = true;
+            SoundEngine.PlaySound(SoundID.Item101, NPC.position);
+            BossIntroScreen.Show("Prototype ZR-1", "\"Demise of the technologers\"", "Boss 5", "ReLogic");
+        }
             Player target = Main.player[NPC.target];
                         // Rocket attack logic
             NPC.localAI[1]++;

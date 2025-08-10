@@ -36,9 +36,9 @@ namespace TechnologerMod.Content.Bosses.BlightWyrm;
         {
             NPC.width = 173;
             NPC.height = 104;
-            NPC.damage = 50;
-            NPC.defense = 80;
-            NPC.lifeMax = 10000;
+            NPC.damage = 30;
+            NPC.defense = 10;
+            NPC.lifeMax = 7000;
             NPC.knockBackResist = 0f;
             NPC.aiStyle = -1;
             NPC.noTileCollide = true;
@@ -79,11 +79,11 @@ namespace TechnologerMod.Content.Bosses.BlightWyrm;
                             Main.myPlayer
                         );
 
-            Main.projectile[proj].hostile = true;
-            Main.projectile[proj].friendly = false;
-            Main.projectile[proj].owner = 255; // <-- Mark it as NPC-owned (not by a player)
-            Main.projectile[proj].usesLocalNPCImmunity = true;
-            Main.projectile[proj].localNPCHitCooldown = -1;
+                            Main.projectile[proj].hostile = true;
+                            Main.projectile[proj].friendly = false;
+                            Main.projectile[proj].owner = 255; // <-- Mark it as NPC-owned (not by a player)
+                            Main.projectile[proj].usesLocalNPCImmunity = true;
+                            Main.projectile[proj].localNPCHitCooldown = -1;
 
                         SoundEngine.PlaySound(SoundID.NPCHit56, NPC.position);
                     }

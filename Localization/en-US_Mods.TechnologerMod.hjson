@@ -200,7 +200,7 @@ Items: {
 
 	BlightedCore: {
 		DisplayName: Blighted Core
-		Tooltip: Increases ENERGY by 30 and Regen amount by 1 ENERGY
+		Tooltip: Increases ENERGY by 30 and Regen amount by 2 ENERGY
 	}
 
 	BlightedSlasher: {
@@ -261,7 +261,7 @@ Items: {
 
 	GemCore: {
 		DisplayName: Gem Core
-		Tooltip: Increases Technologer Damage by 5% and Regen amount by 1 ENERGY
+		Tooltip: Increases Technologer Damage by 5% and Regen amount by 2 ENERGY
 	}
 
 	PrismatrixBag: {
@@ -277,6 +277,42 @@ Items: {
 	ShardLauncher: {
 		DisplayName: Shard Launcher
 		Tooltip: ""
+	}
+
+	PrimordialGem: {
+		DisplayName: Primordial Gem
+		Tooltip: ""
+	}
+
+	CrystalineMask: {
+		Tooltip: Increases Technologer damage by 9%
+		SetBonus: Increases ENERGY meter by {0}.
+		DisplayName: Crystaline Mask
+	}
+
+	CrystalineChestplate: {
+		DisplayName: Crystaline Chestplate
+		Tooltip: ""
+	}
+
+	CrystalineLeggings: {
+		DisplayName: Crystaline Leggings
+		Tooltip: ""
+	}
+
+	CrystalineKatana: {
+		DisplayName: Crystaline Katana
+		Tooltip: ""
+	}
+
+	CrystalineRifle: {
+		DisplayName: Crystaline Rifle
+		Tooltip: ""
+	}
+
+	HellstoneBattery: {
+		DisplayName: Hellstone Battery
+		Tooltip: Increases ENERGY by 30 and Attack speed by 10%
 	}
 }
 

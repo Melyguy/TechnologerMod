@@ -39,14 +39,14 @@ public class PrismatrixHead : ModNPC
     {
         Main.npcFrameCount[NPC.type] = Main.npcFrameCount[NPCID.SkeletronHead];
     }
-
+    public bool intro = false;
     public override void SetDefaults()
     {
         NPC.width = 175;
         NPC.height = 175;
         NPC.damage = 40;
         NPC.defense = 10;
-        NPC.lifeMax = 12000;
+        NPC.lifeMax = 10000;
         NPC.knockBackResist = 0f;
         NPC.noGravity = true;
         NPC.noTileCollide = true;
@@ -107,7 +107,7 @@ public class PrismatrixHead : ModNPC
 			npcLoot.Add(notExpertRule);
 
 			// Add the treasure bag using ItemDropRule.BossBag (automatically checks for expert mode)
-			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<BlightWyrmBag>()));
+			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<PrismatrixBag>()));
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCore>(), 3)); // 33% chance
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ShardLauncher>(), 5)); // 33% chance
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<GemCoreShards>(), 1, 30, 45));
@@ -192,6 +192,12 @@ public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color d
         }
     public override void AI()
     {
+        /*if (intro == false)
+        {
+            intro = true;
+            SoundEngine.PlaySound(SoundID.Item101, NPC.position);
+            BossIntroScreen.Show("Prismatrix", "\"Fatal Power Source\"", "Boss 5", "ReLogic");
+        }*/
         // Spawn hands once
         if (NPC.localAI[0] == 0f)
         {
