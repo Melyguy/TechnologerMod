@@ -8,7 +8,8 @@ namespace TechnologerMod{
         public float TechnologerDamage = 0f;
 
         public override void PostUpdate(){
-            
+
+
         }
         public override void ResetEffects()
         {

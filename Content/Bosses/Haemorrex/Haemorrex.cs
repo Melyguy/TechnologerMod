@@ -18,6 +18,8 @@ using Microsoft.Xna.Framework.Graphics;
 using TechnologerMod.Content.Items.Placeable;
 using TechnologerMod.Content.Items.Accessories;
 using System.Linq;
+using TechnologerMod.Content.Tiles.Furniture;
+using TechnologerMod.Content.Items.Placeable.Furniture;
 
 namespace TechnologerMod.Content.Bosses.Haemorrex;
 [AutoloadBossHead]
@@ -83,7 +85,7 @@ if (!target.active || target.dead)
         // NPC.ai[1] = transition timer
         // 0 = phase 1, 1 = transitioning, 2 = phase 2
             NPC.localAI[1]++;
-        if (NPC.localAI[1] >= 180 && Main.netMode != NetmodeID.MultiplayerClient && !secondPhase)
+        if (NPC.localAI[1] >= 180 && Main.netMode != NetmodeID.MultiplayerClient)
         {
             NPC.localAI[1] = 0;
 
@@ -115,7 +117,90 @@ if (!target.active || target.dead)
                 }
                 else
                 {
-                    
+                    Vector2 shootDirection = target.Center - NPC.Center;
+                    shootDirection.Normalize();
+                    shootDirection *= 50f;
+
+                    int proj = Projectile.NewProjectile(
+                        NPC.GetSource_FromAI(),
+                        NPC.Center,
+                        shootDirection,
+                        ProjectileID.BloodShot,
+                        40,
+                        1f,
+                        Main.myPlayer
+                    );
+
+                    Main.projectile[proj].hostile = true;
+                    Main.projectile[proj].friendly = false;
+                    Main.projectile[proj].owner = 255; // <-- Mark it as NPC-owned (not by a player)
+                    Main.projectile[proj].usesLocalNPCImmunity = true;
+                    Main.projectile[proj].localNPCHitCooldown = -1;
+
+                    SoundEngine.PlaySound(SoundID.NPCHit56, NPC.position);
+                }
+                if (secondPhase)
+                {
+                    if (Main.rand.NextBool()) // 50% chance energyball
+{
+    Vector2 shootDirection = target.Center - NPC.Center;
+    shootDirection.Normalize();
+    shootDirection *= 10f;
+
+    int numberProjectiles = 4; // how many projectiles
+    float spread = MathHelper.ToRadians(20f); // total spread angle (20 degrees here)
+    float baseRotation = shootDirection.ToRotation();
+    
+    for (int i = 0; i < numberProjectiles; i++)
+    {
+        // Evenly spread them across the arc
+        float rotation = baseRotation + MathHelper.Lerp(-spread / 2, spread / 2, i / (float)(numberProjectiles - 1));
+        Vector2 perturbedSpeed = rotation.ToRotationVector2() * shootDirection.Length();
+
+        int proj = Projectile.NewProjectile(
+            NPC.GetSource_FromAI(),
+            NPC.Center,
+            perturbedSpeed,
+            ProjectileID.GoldenShowerHostile,
+            40,
+            1f,
+            Main.myPlayer
+        );
+
+        Main.projectile[proj].hostile = true;
+        Main.projectile[proj].friendly = false;
+        Main.projectile[proj].owner = 255;
+        Main.projectile[proj].usesLocalNPCImmunity = true;
+        Main.projectile[proj].localNPCHitCooldown = -1;
+    }
+
+    SoundEngine.PlaySound(SoundID.NPCHit56, NPC.position);
+}
+
+                else
+                {
+                    Vector2 shootDirection = target.Center - NPC.Center;
+                    shootDirection.Normalize();
+                    shootDirection *= 50f;
+
+                    int proj = Projectile.NewProjectile(
+                        NPC.GetSource_FromAI(),
+                        NPC.Center,
+                        shootDirection,
+                        ProjectileID.BloodShot,
+                        40,
+                        1f,
+                        Main.myPlayer
+                    );
+
+                    Main.projectile[proj].hostile = true;
+                    Main.projectile[proj].friendly = false;
+                    Main.projectile[proj].owner = 255; // <-- Mark it as NPC-owned (not by a player)
+                    Main.projectile[proj].usesLocalNPCImmunity = true;
+                    Main.projectile[proj].localNPCHitCooldown = -1;
+
+                    SoundEngine.PlaySound(SoundID.NPCHit56, NPC.position);
+                }
                 }
             }
         }
@@ -224,6 +309,61 @@ if (!target.active || target.dead)
             // Optional: dash, scream, or spawn projectiles
         }
     }
+public override void ModifyNPCLoot(NPCLoot npcLoot) {
+			// Do NOT misuse the ModifyNPCLoot and OnKill hooks: the former is only used for registering drops, the latter for everything else
+
+			// The order in which you add loot will appear as such in the Bestiary. To mirror vanilla boss order:
+			// 1. Trophy
+			// 2. Classic Mode ("not expert")
+			// 3. Expert Mode (usually just the treasure bag)
+			// 4. Master Mode (relic first, pet last, everything else inbetween)
+
+			// Trophies are spawned with 1/10 chance
+
+			// All the Classic Mode drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
+			LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
+        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<HardenedIchor>(), 1, 30, 45)); // 100% drop chance
+			notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ZuuniteBar>(), 1, 30, 45));
+            // Add your new drops here
+			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 30, 45)); // 100% drop chance
+			
+			// Add some materials with different drop chances
+			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.HallowedBar, 1, 30, 45)); // 100% drop chance
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ZuuniteAnvilItem>(), 1));
+			
+			
+			// You can also add coins
+			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.GoldCoin, 1, 3, 5)); // Drops 3-5 Gold Coins
+
+			// Notice we use notExpertRule.OnSuccess instead of npcLoot.Add so it only applies in normal mode
+			// Boss masks are spawned with 1/7 chance
+			//notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ForestGuardianMask>(), 7));
+
+			// This part is not required for a boss and is just showcasing some advanced stuff you can do with drop rules to control how items spawn
+			// We make 12-15 ExampleItems spawn randomly in all directions, like the lunar pillar fragments. Hereby we need the DropOneByOne rule,
+			// which requires these parameters to be defined
+			
+			var parameters = new DropOneByOne.Parameters() {
+				ChanceNumerator = 1,
+				ChanceDenominator = 1,
+				MinimumStackPerChunkBase = 1,
+				MaximumStackPerChunkBase = 1,
+				MinimumItemDropsCount = 1,
+				MaximumItemDropsCount = 1,
+			};
+			
+
+			// Finally add the leading rule
+			npcLoot.Add(notExpertRule);
+
+			// Add the treasure bag using ItemDropRule.BossBag (automatically checks for expert mode)
+			npcLoot.Add(ItemDropRule.BossBag(ModContent.ItemType<HaemorexBag>()));
+
+			// ItemDropRule.MasterModeCommonDrop for the relic
+
+			// ItemDropRule.MasterModeDropOnAllPlayers for the pet
+			npcLoot.Add(ItemDropRule.MasterModeDropOnAllPlayers(ItemID.SandBlock, 10)); //CHANGE THIS LATER!!!
+		}
 
 public override void FindFrame(int frameHeight)
 {

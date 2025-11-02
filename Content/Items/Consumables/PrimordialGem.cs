@@ -51,7 +51,7 @@ namespace TechnologerMod.Content.Items.Consumables
 				// (explicitly excluded serverside here)
 				SoundEngine.PlaySound(SoundID.Zombie105, player.position);
 
-				int type = ModContent.NPCType<BlightWyrmHead>();
+				int type = ModContent.NPCType<PrismatrixHead>();
 
 				if (Main.netMode != NetmodeID.MultiplayerClient) {
 					// If the player is not in multiplayer, spawn directly

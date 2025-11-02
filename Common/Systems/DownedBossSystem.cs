@@ -17,14 +17,16 @@ namespace TechnologerMod.Common.Systems
 		public static bool DownedPrototype;
 		public static bool DownedBlight;
 		public static bool DownedPrismatrix;
+		public static bool DownedHaemorex;
 		
 		// public static bool downedOtherBoss = false;
 
 		public override void ClearWorld() {
 
 			DownedPrototype = false;
-			DownedBlight = false;	
+			DownedBlight = false;
 			DownedPrismatrix = false;	
+			DownedHaemorex = false;
 			// downedOtherBoss = false;
 		}
 
@@ -41,8 +43,13 @@ namespace TechnologerMod.Common.Systems
 			{
 				tag["downedBlight"] = true;
 			}
-			if(DownedPrismatrix) {
-				tag["DownedPrismatrix"] = true;	
+			if (DownedPrismatrix)
+			{
+				tag["DownedPrismatrix"] = true;
+			}
+			if (DownedHaemorex)
+			{
+				tag["DownedHaemorex"] = true;
 			}
 			// if (downedOtherBoss) {
 			//	tag["downedOtherBoss"] = true;
@@ -52,13 +59,15 @@ namespace TechnologerMod.Common.Systems
 public override void LoadWorldData(TagCompound tag) {
     DownedPrototype = tag.ContainsKey("downedPrototype") && tag.GetBool("downedPrototype");
     DownedBlight = tag.ContainsKey("downedBlight") && tag.GetBool("downedBlight");
-    DownedPrismatrix = tag.ContainsKey("DownedPrismatrix") && tag.GetBool("DownedPrismatrix");
+			DownedPrismatrix = tag.ContainsKey("DownedPrismatrix") && tag.GetBool("DownedPrismatrix");
+	DownedHaemorex = tag.ContainsKey("DownedHaemorex") && tag.GetBool("DownedHaemorex");
+	// downedOtherBoss = tag.ContainsKey("downedOtherBoss") && tag.GetBool("downedOtherBoss");
 }
 
 
 		public override void NetSend(BinaryWriter writer) {
 			// Order of parameters is important and has to match that of NetReceive
-			writer.WriteFlags(DownedPrototype, DownedBlight, DownedPrismatrix);
+			writer.WriteFlags(DownedPrototype, DownedBlight, DownedPrismatrix, DownedHaemorex);
 
 			// WriteFlags supports up to 8 entries, if you have more than 8 flags to sync, call WriteFlags again.
 
@@ -67,7 +76,7 @@ public override void LoadWorldData(TagCompound tag) {
 
 		public override void NetReceive(BinaryReader reader) {
 			// Order of parameters is important and has to match that of NetSend
-			reader.ReadFlags(out DownedPrototype, out DownedBlight, out DownedPrismatrix);
+			reader.ReadFlags(out DownedPrototype, out DownedBlight, out DownedPrismatrix, out DownedHaemorex);
 			// ReadFlags supports up to 8 entries, if you have more than 8 flags to sync, call ReadFlags again.
 		}
 	}

@@ -314,6 +314,43 @@ Items: {
 		DisplayName: Hellstone Battery
 		Tooltip: Increases ENERGY by 30 and Attack speed by 10%
 	}
+
+	ZuuniteHelmet: {
+		Tooltip: Mods.TechnologerMod.Items.ZuuniteHelmet.Tooltip
+		SetBonus: Mods.TechnologerMod.Items.ZuuniteHelmet.SetBonus
+		DisplayName: Zuunite Helmet
+	}
+
+	HardenedIchorMask: {
+		SetBonus: Mods.TechnologerMod.Items.HardenedIchorMask.SetBonus
+		Tooltip: Mods.TechnologerMod.Items.HardenedIchorMask.Tooltip
+		DisplayName: Hardened Ichor Mask
+	}
+
+	HardenedIchor: {
+		DisplayName: Hardened Ichor
+		Tooltip: ""
+	}
+
+	ZuuniteChestplate: {
+		DisplayName: Zuunite Chestplate
+		Tooltip: ""
+	}
+
+	ZuuniteLeggings: {
+		DisplayName: Zuunite Leggings
+		Tooltip: ""
+	}
+
+	HaemorexBag: {
+		DisplayName: Haemorex Bag
+		Tooltip: ""
+	}
+
+	IchoredSlasher: {
+		DisplayName: Ichored Slasher
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
