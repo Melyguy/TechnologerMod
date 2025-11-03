@@ -99,5 +99,3 @@ MIT © 2025 — Built with ❤️ by **Melyguy** for the modding community.
 > “Invent. Build. Evolve.” 🚀
 
 ---
-
-Would you like me to add **badges** (e.g., build status, license, .NET version) and a **screenshot section** to make it look even more professional?
