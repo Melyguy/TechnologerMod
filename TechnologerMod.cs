@@ -9,57 +9,40 @@ namespace TechnologerMod
 	{
 		public override void PostSetupContent()
 		{
-			// Register bosses with Boss Checklist (if the player has the BossChecklist mod installed).
-			// This call is optional and only executed when BossChecklist is present.
-			if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist))
-			{
-				// Each AddBoss call typically takes: (string displayName, float progression, Func<bool> downedCondition, int npcType)
-				// BossChecklist's Mod.Call accepts a flexible set of parameters. We use a minimal form: name, progression, downed delegate and NPC type.
+			if (!ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist))
+				return;
 
-				// Blight Wyrm
-				try
-				{
-					bossChecklist.Call("AddBoss", this,
-						"Blight Wyrm",
-						2.5f,
-						(Func<bool>)(() => DownedBossSystem.DownedBlight),
-						ModContent.NPCType<Content.Bosses.BlightWyrm.BlightWyrmHead>());
-				}
-				catch { }
+			// Register bosses with Boss Checklist
+			// Order: modInstance, internalName, displayName, progress, downed condition, npc type
+			bossChecklist.Call(
+				"AddBoss",
+				this,                // Mod instance
+				"BlightWyrm",       // Internal boss name
+				"Blight Wyrm",      // Display name
+				2.5f,               // Progress (2.5 = between Eye of Cthulhu and Eate r of Worlds)
+				DownedBossSystem.DownedBlight, // Downed bool
+				ModContent.NPCType<Content.Bosses.BlightWyrm.BlightWyrmHead>()
+			);
 
-				// Prototype ZR1
-				/*try
-				{
-					bossChecklist.Call("AddBoss", this,
-						"Prototype ZR-1",
-						3.0f,
-						(Func<bool>)(() => DownedBossSystem.DownedPrototype),
-						ModContent.NPCType<Content.Bosses.PrototypeZR1.PrototypeZR1Head>());
-				}
-				catch { }*/
+			bossChecklist.Call(
+				"AddBoss",
+				this,
+				"Prismatrix",
+				"Prismatrix",
+				4.0f,
+				DownedBossSystem.DownedPrismatrix,
+				ModContent.NPCType<Content.Bosses.Prismatrix.PrismatrixHead>()
+			);
 
-				// Prismatrix
-				try
-				{
-					bossChecklist.Call("AddBoss", this,
-						"Prismatrix",
-						4.0f,
-						(Func<bool>)(() => DownedBossSystem.DownedPrismatrix),
-						ModContent.NPCType<Content.Bosses.Prismatrix.PrismatrixHead>());
-				}
-				catch { }
-
-				// Haemorrex
-				try
-				{
-					bossChecklist.Call("AddBoss", this,
-						"Haemorrex",
-						4.5f,
-						(Func<bool>)(() => DownedBossSystem.DownedHaemorex),
-						ModContent.NPCType<Content.Bosses.Haemorrex.Haemorrex>());
-				}
-				catch { }
-			}
+			bossChecklist.Call(
+				"AddBoss",
+				this,
+				"Haemorrex",
+				"Haemorrex",
+				4.5f,
+				DownedBossSystem.DownedHaemorex,
+				ModContent.NPCType<Content.Bosses.Haemorrex.Haemorrex>()
+			);
 		}
 	}
 }

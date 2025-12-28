@@ -43,6 +43,7 @@ namespace TechnologerMod.Content.Items.Consumables
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ZuuniteBar>(), 1, 30, 45));
 			itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<HardenedIchor>(), 1, 30, 45));
             itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<ZuuniteAnvilItem>(), 1));
+            itemLoot.Add(ItemDropRule.Common(ModContent.ItemType<IchoredSlasher>(), 5));
             
 			
 			// Chance-based drops (33% chance each)

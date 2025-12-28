@@ -330,6 +330,7 @@ public override void ModifyNPCLoot(NPCLoot npcLoot) {
 			// Add some materials with different drop chances
 			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.HallowedBar, 1, 30, 45)); // 100% drop chance
             notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ZuuniteAnvilItem>(), 1));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IchoredSlasher>(), 5));
 			
 			
 			// You can also add coins

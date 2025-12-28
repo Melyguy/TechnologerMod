@@ -19,13 +19,5 @@ namespace TechnologerMod.Content.Items.Placeable.Furniture
             Item.consumable = true;
             Item.createTile = ModContent.TileType<Tiles.Furniture.ZuuniteAnvil>();
         }
-
-        public override void AddRecipes()
-        {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.IronBar, 10);
-            recipe.AddTile(TileID.Anvils);
-            recipe.Register();
-        }
     }
 }

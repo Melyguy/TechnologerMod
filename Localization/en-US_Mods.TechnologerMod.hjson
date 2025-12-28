@@ -322,8 +322,8 @@ Items: {
 	}
 
 	HardenedIchorMask: {
-		SetBonus: Mods.TechnologerMod.Items.HardenedIchorMask.SetBonus
-		Tooltip: Mods.TechnologerMod.Items.HardenedIchorMask.Tooltip
+		Tooltip: Increases Technologer damage by 9%
+		SetBonus: Increases ENERGY meter by {0}.
 		DisplayName: Hardened Ichor Mask
 	}
 
@@ -350,6 +350,16 @@ Items: {
 	IchoredSlasher: {
 		DisplayName: Ichored Slasher
 		Tooltip: ""
+	}
+
+	LumpOfIchor: {
+		Tooltip: ""
+		DisplayName: Lump Of Ichor
+	}
+
+	IchorBattery: {
+		Tooltip: Increases ENERGY by 60 and Attack speed by 15%
+		DisplayName: Ichor Battery
 	}
 }
 
