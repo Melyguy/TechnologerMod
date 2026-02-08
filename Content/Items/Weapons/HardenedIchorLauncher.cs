@@ -68,6 +68,7 @@ namespace TechnologerMod.Content.Items.Weapons
 				.AddIngredient(ItemID.Gel, 80)
 				.AddIngredient(ItemID.Ichor, 40)
                 .AddIngredient<HardenedIchor>(20)
+                .AddIngredient<ZuuniteBar>(30)
 				.AddIngredient<BouncySlimeLauncher>()
 				.AddTile<HellPunkerTable>()
 				.Register();

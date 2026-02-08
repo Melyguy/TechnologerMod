@@ -371,6 +371,26 @@ Items: {
 		DisplayName: Hardened Ichor Slasher
 		Tooltip: ""
 	}
+
+	IchorRifle: {
+		DisplayName: Ichor Rifle
+		Tooltip: ""
+	}
+
+	PhasiumRifle: {
+		DisplayName: Phasium Rifle
+		Tooltip: ""
+	}
+
+	PhasiumTrident: {
+		DisplayName: Phasium Trident
+		Tooltip: ""
+	}
+
+	PhasiumBattery: {
+		DisplayName: Phasium Battery
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

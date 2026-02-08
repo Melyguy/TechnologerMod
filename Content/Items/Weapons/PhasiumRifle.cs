@@ -14,7 +14,7 @@ using TechnologerMod.Content.Items.Placeable;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
-	public class IchorRifle : ModItem
+	public class PhasiumRifle : ModItem
 	{
 		public override void SetDefaults() {
 			// Modders can use Item.DefaultToRangedWeapon to quickly set many common properties, such as: useTime, useAnimation, useStyle, autoReuse, DamageType, shoot, shootSpeed, useAmmo, and noMelee. These are all shown individually here for teaching purposes.
@@ -38,7 +38,7 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 
             
-			Item.damage = 125; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
+			Item.damage = 150; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
 			Item.knockBack = 5f; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
 			Item.noMelee = true; // So the item's animation doesn't do damage.
 
@@ -65,9 +65,9 @@ namespace TechnologerMod.Content.Items.Weapons
         public override void AddRecipes()
         {
             CreateRecipe()
-				.AddIngredient<CrystalineRifle>()
-                .AddIngredient<HardenedIchor>(30)
-                .AddIngredient<ZuuniteBar>(30)
+				.AddIngredient<IchorRifle>()
+                .AddIngredient<Phasium>(30)
+                .AddIngredient<VoidGlassItem>(20)
                 .AddTile<HellPunkerTable>()
                 .Register();
         }
