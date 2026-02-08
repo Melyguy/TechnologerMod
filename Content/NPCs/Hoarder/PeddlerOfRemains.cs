@@ -136,11 +136,15 @@ namespace TechnologerMod.Content.NPCs.Hoarder
         new("Mods.TechnologerMod.Conditions.DefeatedBlightedWyrm", () => DownedBossSystem.DownedBlight);
 public static readonly Condition DefeatedPrismatrix = 
         new("Mods.TechnologerMod.Conditions.DefeatedPrismatrix", () => DownedBossSystem.DownedPrismatrix);
+        public static readonly Condition DefeatedHaemorex = 
+        new("Mods.TechnologerMod.Conditions.DefeatedHaemorex", () => DownedBossSystem.DownedHaemorex);
+        
         public override void AddShops()
         {
             NPCShop Sekiroshop = new NPCShop(Type, "Shop")
                 .Add(ModContent.ItemType<EyesOfTheWyrm>(), DefeatedBlightedWyrm)
                 .Add(ModContent.ItemType<GemCoreShards>(), DefeatedPrismatrix)
+                .Add(ModContent.ItemType<HardenedIchor>(), DefeatedHaemorex)
                 .Add(ItemID.Gel, Condition.DownedKingSlime)
                 .Add(ItemID.CrimtaneOre, Condition.DownedEyeOfCthulhu)
                 .Add(ItemID.DemoniteOre, Condition.DownedEyeOfCthulhu)

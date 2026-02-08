@@ -361,6 +361,16 @@ Items: {
 		Tooltip: Increases ENERGY by 60 and Attack speed by 15%
 		DisplayName: Ichor Battery
 	}
+
+	HardenedIchorLauncher: {
+		DisplayName: Hardened Ichor Launcher
+		Tooltip: ""
+	}
+
+	HardenedIchorSlasher: {
+		DisplayName: Hardened Ichor Slasher
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -377,6 +387,7 @@ Projectiles: {
 	FireSlash.DisplayName: Fire Slash
 	BouncySlimeBall.DisplayName: Bouncy Slime Ball
 	Shard.DisplayName: Shard
+	IchorBall.DisplayName: Ichor Ball
 }
 
 Tiles: {
@@ -442,4 +453,5 @@ Biomes: {
 Conditions: {
 	DefeatedBlightedWyrm: Defeated bligted wyrm
 	DefeatedPrismatrix: Defeated prismatrix
+	DefeatedHaemorex: Mods.TechnologerMod.Conditions.DefeatedHaemorex
 }
