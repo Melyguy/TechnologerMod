@@ -389,6 +389,11 @@ Items: {
 
 	PhasiumBattery: {
 		DisplayName: Phasium Battery
+		Tooltip: "Increases ENERGY by 100 and Attack speed by 30%"
+	}
+
+	PhasiumSlasher: {
+		DisplayName: Phasium Slasher
 		Tooltip: ""
 	}
 }
