@@ -14,7 +14,7 @@ using TechnologerMod.Content.Items.Placeable;
 
 namespace TechnologerMod.Content.Items.Weapons
 {
-	public class PhasiumRifle : ModItem
+	public class PhasiumOrbs : ModItem
 	{
 		public override void SetDefaults() {
 			// Modders can use Item.DefaultToRangedWeapon to quickly set many common properties, such as: useTime, useAnimation, useStyle, autoReuse, DamageType, shoot, shootSpeed, useAmmo, and noMelee. These are all shown individually here for teaching purposes.
@@ -26,25 +26,25 @@ namespace TechnologerMod.Content.Items.Weapons
 			Item.rare = ItemRarityID.Green; // The color that the item's name will be in-game.
 
 			// Use Properties
-			Item.useTime = 45; // The item's use time in ticks (60 ticks == 1 second.)
-			Item.useAnimation = 45; // The length of the item's use animation in ticks (60 ticks == 1 second.)
+			Item.useTime = 10; // The item's use time in ticks (60 ticks == 1 second.)
+			Item.useAnimation = 10; // The length of the item's use animation in ticks (60 ticks == 1 second.)
 			Item.useStyle = ItemUseStyleID.Shoot; // How you use the item (swinging, holding out, etc.)
 			Item.autoReuse = true; // Whether or not you can hold click to automatically use it again.
 
 			// The sound that this item plays when used.
-			Item.UseSound = SoundID.Item38;
+			Item.UseSound = SoundID.Item101;
 
 			// Weapon Properties
 			Item.DamageType = DamageClass.Ranged; // Sets the damage type to ranged.
 
             
-			Item.damage = 150; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
+			Item.damage = 100; // Sets the item's damage. Note that projectiles shot by this weapon will use its and the used ammunition's damage added together.
 			Item.knockBack = 5f; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
 			Item.noMelee = true; // So the item's animation doesn't do damage.
 
 			// Gun Properties
 			Item.shoot = ProjectileID.PurificationPowder; // For some reason, all the guns in the vanilla source have this.
-            Item.shootSpeed = 80f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
+            Item.shootSpeed = 40f; // The speed of the projectile (measured in pixels per frame.) This value equivalent to Handgun
 			//Item.useAmmo = AmmoID.Gel; // The "ammo Id" of the ammo item that this weapon uses. Ammo IDs are magic numbers that usually correspond to the item id of one item that most commonly represent the ammo type.
 		}
 
@@ -62,36 +62,35 @@ namespace TechnologerMod.Content.Items.Weapons
             damage += player.GetModPlayer<GlobalPlayer>().TechnologerDamage;
         }
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
-        public override void AddRecipes()
-        {
-            CreateRecipe()
-				.AddIngredient<IchorRifle>()
-                .AddIngredient<Phasium>(30)
-                .AddIngredient<VoidGlassItem>(20)
-                .AddTile<PhasiumForge>()
-                .Register();
-        }
 
 		// This method lets you adjust position of the gun in the player's hands. Play with these values until it looks good with your graphics.
 		public override Vector2? HoldoutOffset() {
-			return new Vector2(-24f, 0f);
+			return new Vector2(-2f, 0f);
 		}
 public override bool CanUseItem(Player player)
 {
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Only allow shooting if the player has enough Focus
-    return modPlayer.TinkererGoggles && modPlayer.Focus >= 80;
+    return modPlayer.TinkererGoggles && modPlayer.Focus >= 20;
 }
-
+        public override void AddRecipes()
+        {
+            CreateRecipe()
+				.AddIngredient<ShardLauncher>()
+                .AddIngredient<Phasium>(30)
+                .AddIngredient<VoidGlassItem>(20)
+                .AddTile<PhasiumForge>()
+                .Register();
+        }
 public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 {
     var modPlayer = player.GetModPlayer<TechnologerPlayer>();
 
     // Consume Focus before shooting
-    if (modPlayer.ConsumeFocus(80))
+    if (modPlayer.ConsumeFocus(20))
     {
-        int projType = ModContent.ProjectileType<Shard>();
+        int projType = ModContent.ProjectileType<PhasiumProj>();
         Projectile.NewProjectile(source, position, velocity, projType, damage, knockback, player.whoAmI);
 
         // Apply recoil to the player

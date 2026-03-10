@@ -132,10 +132,10 @@ public override bool CanUseItem(Player player)
 		// Please see Content/ExampleRecipes.cs for a detailed explanation of recipe creation.
 		public override void AddRecipes() {
              CreateRecipe()
-				.AddIngredient<HardenedIchor>()
+				.AddIngredient<HardenedIchorSlasher>()
                 .AddIngredient<VoidGlassItem>(30)
                 .AddIngredient<Phasium>(30)
-                .AddTile<ZuuniteAnvil>()
+                .AddTile<PhasiumForge>()
                 .Register();
             
 		}

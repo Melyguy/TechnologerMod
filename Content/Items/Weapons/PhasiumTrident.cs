@@ -91,7 +91,7 @@ namespace TechnologerMod.Content.Items.Weapons
 				.AddIngredient<IchoredSlasher>()
                 .AddIngredient<Phasium>(30)
                 .AddIngredient<VoidGlassItem>(30)
-                .AddTile<ZuuniteAnvil>()
+                .AddTile<PhasiumForge>()
                 .Register();
         }
 

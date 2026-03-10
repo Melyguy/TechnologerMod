@@ -389,12 +389,27 @@ Items: {
 
 	PhasiumBattery: {
 		DisplayName: Phasium Battery
-		Tooltip: "Increases ENERGY by 100 and Attack speed by 30%"
+		Tooltip: Increases ENERGY by 100 and Attack speed by 30%
 	}
 
 	PhasiumSlasher: {
 		DisplayName: Phasium Slasher
 		Tooltip: ""
+	}
+
+	PhasiumOrbs: {
+		DisplayName: Phasium Orbs
+		Tooltip: ""
+	}
+
+	PhasiumForgeItem: {
+		DisplayName: Phasium Forge Item
+		Tooltip: ""
+	}
+
+	HardenedIchorRocketPistol: {
+		Tooltip: ""
+		DisplayName: Hardened Ichor Rocket Pistol
 	}
 }
 
@@ -413,6 +428,8 @@ Projectiles: {
 	BouncySlimeBall.DisplayName: Bouncy Slime Ball
 	Shard.DisplayName: Shard
 	IchorBall.DisplayName: Ichor Ball
+	PhasiumProj.DisplayName: Phasium Proj
+	HardenedIchorRocket.DisplayName: Hardened Ichor Rocket
 }
 
 Tiles: {
@@ -423,6 +440,7 @@ Tiles: {
 	SpringloadedTinkererTable.MapEntry: Springloaded Tinkerer Table
 	EvilInfusedTinkererTable.MapEntry: Evil Infused Tinkerer Table
 	HellPunkerTable.MapEntry: Hell Punker Table
+	PhasiumForge.MapEntry: Phasium Forge
 }
 
 NPCs: {
