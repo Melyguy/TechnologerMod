@@ -309,6 +309,20 @@ if (!target.active || target.dead)
             // Optional: dash, scream, or spawn projectiles
         }
     }
+    public override void OnKill()
+    {
+        // Spawn the next boss or trigger the next event here
+        // For example, you could spawn a new NPC:
+            if (Main.netMode != NetmodeID.MultiplayerClient)
+            {
+                int meteorX = Main.rand.Next(200, Main.maxTilesX - 200);
+
+                WorldGen.spawnMeteor = true;
+                WorldGen.dropMeteor();
+
+                MeteorEditor.ReplaceMeteorTiles();
+            }
+    }
 public override void ModifyNPCLoot(NPCLoot npcLoot) {
 			// Do NOT misuse the ModifyNPCLoot and OnKill hooks: the former is only used for registering drops, the latter for everything else
 

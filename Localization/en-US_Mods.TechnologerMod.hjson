@@ -484,6 +484,10 @@ NPCs: {
 	}
 
 	Haemorrex.DisplayName: Haemorrex, Forgotten triplet
+	AegisDefenseSystem.DisplayName: Aegis Defense System
+	RogueAegisDrone.DisplayName: Rogue Aegis Drone
+	aegisDrone.DisplayName: aegis Drone
+	AegisTurret.DisplayName: Aegis Turret
 }
 
 Biomes: {
