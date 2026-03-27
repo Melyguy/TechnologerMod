@@ -319,7 +319,7 @@ if (!target.active || target.dead)
 
                 WorldGen.spawnMeteor = true;
                 WorldGen.dropMeteor();
-
+    
                 MeteorEditor.ReplaceMeteorTiles();
             }
     }
