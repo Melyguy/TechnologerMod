@@ -411,6 +411,72 @@ Items: {
 		Tooltip: ""
 		DisplayName: Hardened Ichor Rocket Pistol
 	}
+
+	AegisShard: {
+		Tooltip: ""
+		DisplayName: Aegis Shard
+	}
+
+	AegisOre: {
+		Tooltip: ""
+		DisplayName: Aegis Ore
+	}
+
+	AegisAlloy: {
+		Tooltip: ""
+		DisplayName: Aegis Alloy
+	}
+
+	aegisCore: {
+		Tooltip: ""
+		DisplayName: aegis Core
+	}
+
+	AegisBag: {
+		Tooltip: ""
+		DisplayName: Aegis Bag
+	}
+
+	AegisBattery: {
+		DisplayName: Aegis Battery
+		Tooltip: Increases ENERGY by 150 and Attack speed by 40%
+	}
+
+	AegisHood: {
+		Tooltip: Increases Technologer damage by 10%
+		SetBonus: Increases ENERGY meter by {0} And Regen by 10.
+		DisplayName: Aegis Hood
+	}
+
+	AegisLeggings: {
+		DisplayName: Aegis Leggings
+		Tooltip: ""
+	}
+
+	AegisRobe: {
+		DisplayName: Aegis Robe
+		Tooltip: ""
+	}
+
+	AegisTurret: {
+		DisplayName: Aegis Turret
+		Tooltip: ""
+	}
+
+	AegisPlatedGemCore: {
+		DisplayName: Aegis Plated Gem Core
+		Tooltip: ""
+	}
+
+	AegisRifle: {
+		DisplayName: Aegis Rifle
+		Tooltip: ""
+	}
+
+	GelaticMagnumOpus: {
+		DisplayName: Gelatic Magnum Opus
+		Tooltip: ""
+	}
 }
 
 Projectiles: {

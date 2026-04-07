@@ -20,6 +20,7 @@ using TechnologerMod.Content.Items.Accessories;
 using System.Threading;
 using TechnologerMod.Content.Items.Placeable.Furniture;
 using TechnologerMod.Content.Bosses.AegisDefenseSystem.Drones;
+using TechnologerMod.Content.Tiles;
 
 
 namespace TechnologerMod.Content.Bosses.AegisDefenseSystem;
@@ -210,6 +211,26 @@ if (Main.rand.NextBool() && NPC.ai[1] > timebetweenSummons)
         // For example, you could spawn a new NPC:
 
             Main.NewText("Aegis Alloy defense mesh deactivated.");
+
+        // New code: Replace ~50% of cobalt ore with AegisOre
+        if (Main.netMode != NetmodeID.MultiplayerClient) // Only run on server/single-player
+        {
+            for (int x = 0; x < Main.maxTilesX; x++)
+            {
+                for (int y = 0; y < Main.maxTilesY; y++)
+                {
+                    if (Main.tile[x, y].TileType == TileID.Copper && Main.rand.NextBool()) // 50% chance to replace
+                    {
+                        Main.tile[x, y].TileType = (ushort)ModContent.TileType<AegisOrePlaced>();
+                        WorldGen.SquareTileFrame(x, y, true); // Update tile visuals
+                        if (Main.netMode == NetmodeID.Server)
+                        {
+                            NetMessage.SendTileSquare(-1, x, y, 1); // Sync to clients in multiplayer
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public override void ModifyNPCLoot(NPCLoot npcLoot) {
@@ -225,15 +246,14 @@ if (Main.rand.NextBool() && NPC.ai[1] > timebetweenSummons)
 
 			// All the Classic Mode drops here are based on "not expert", meaning we use .OnSuccess() to add them into the rule, which then gets added
 			LeadingConditionRule notExpertRule = new LeadingConditionRule(new Conditions.NotExpert());
-        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<HardenedIchor>(), 1, 30, 45)); // 100% drop chance
+        notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<VoidGlassItem>(), 1, 30, 45)); // 100% drop chance
 			notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ZuuniteBar>(), 1, 30, 45));
             // Add your new drops here
 			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.SoulofFright, 1, 30, 45)); // 100% drop chance
 			
 			// Add some materials with different drop chances
 			notExpertRule.OnSuccess(ItemDropRule.Common(ItemID.HallowedBar, 1, 30, 45)); // 100% drop chance
-            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<ZuuniteAnvilItem>(), 1));
-            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<IchoredSlasher>(), 5));
+            notExpertRule.OnSuccess(ItemDropRule.Common(ModContent.ItemType<aegisCore>(), 5));
 			
 			
 			// You can also add coins
